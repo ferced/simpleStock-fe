@@ -1,5 +1,6 @@
-declare module '@mui/lab/LoadingButton' {
+declare module '@mui/lab' {
   import { ButtonProps } from '@mui/material/Button';
+  import { ComponentType } from 'react';
 
   export interface LoadingButtonProps extends ButtonProps {
     loading?: boolean;
@@ -7,6 +8,5 @@ declare module '@mui/lab/LoadingButton' {
     loadingPosition?: 'start' | 'end' | 'center';
   }
 
-  const LoadingButton: React.FC<LoadingButtonProps>;
-  export default LoadingButton;
+  export const LoadingButton: ComponentType<LoadingButtonProps>;
 }

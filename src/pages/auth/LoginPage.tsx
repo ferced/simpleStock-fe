@@ -1,4 +1,4 @@
-import LoadingButton from '@mui/lab/LoadingButton';
+import { LoadingButton } from '@mui/lab';
 import { Checkbox, FormControlLabel, Link, Stack, TextField } from '@mui/material';
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
