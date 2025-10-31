@@ -23,14 +23,16 @@ import {
 import { useEffect, useMemo, useState } from 'react';
 import { SectionHeader } from '../../components/common/SectionHeader';
 import { productService } from '../../services/mockApi';
-import { categories } from '../../mocks/data';
+import { categories, suppliers } from '../../mocks/data';
 import type { Product } from '../../types';
+import { ProductModal, type ProductFormData } from '../../components/products/ProductModal';
 
 export const ProductListPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -51,6 +53,23 @@ export const ProductListPage = () => {
     });
   }, [products, search, categoryFilter]);
 
+  const handleSaveProduct = (formData: ProductFormData) => {
+    const supplier = suppliers.find((s) => s.id === formData.supplierId);
+    const newProduct: Product = {
+      id: `p-${Date.now()}`,
+      name: formData.name,
+      sku: formData.sku,
+      categoryId: 'c-1', // Por defecto, se podría agregar selector de categoría después
+      price: formData.salePrice,
+      taxRate: formData.taxRate,
+      stock: formData.stock,
+      suppliers: supplier ? [supplier] : [],
+      updatedAt: new Date().toISOString(),
+    };
+
+    setProducts((prev) => [newProduct, ...prev]);
+  };
+
   return (
     <Stack spacing={4}>
       <SectionHeader
@@ -61,14 +80,17 @@ export const ProductListPage = () => {
             <Button variant="outlined" startIcon={<FilterListIcon />}>
               Filtros avanzados
             </Button>
-            <Button variant="contained">Nuevo producto</Button>
+            <Button variant="contained" onClick={() => setIsModalOpen(true)}>
+              Nuevo producto
+            </Button>
           </Stack>
         }
       />
       <Card>
         <CardContent>
           <Stack spacing={3}>
-            <Grid container spacing={2}>
+            <Box>
+              <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
                 <TextField
                   fullWidth
@@ -101,11 +123,12 @@ export const ProductListPage = () => {
                 </TextField>
               </Grid>
               <Grid item xs={12} md={3}>
-                <Button fullWidth variant="outlined" color="secondary">
+                <Button fullWidth variant="outlined" color="secondary" sx={{ height: '56px' }}>
                   Exportar listado
                 </Button>
               </Grid>
-            </Grid>
+              </Grid>
+            </Box>
             {isLoading ? <LinearProgress /> : null}
             <Box sx={{ overflowX: 'auto' }}>
               <Table>
@@ -163,6 +186,7 @@ export const ProductListPage = () => {
           </Stack>
         </CardContent>
       </Card>
+      <ProductModal open={isModalOpen} onClose={() => setIsModalOpen(false)} onSave={handleSaveProduct} />
     </Stack>
   );
 };
