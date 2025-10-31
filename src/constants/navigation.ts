@@ -21,29 +21,31 @@ export const navigationItems: NavItem[] = [
     path: '/facturacion',
     icon: 'ReceiptLong',
   },
-  {
-    label: 'Clientes',
-    path: '/clientes',
-    icon: 'People',
-  },
-  {
-    label: 'Proveedores',
-    path: '/proveedores',
-    icon: 'LocalShipping',
-  },
-  {
-    label: 'Reportes',
-    path: '/reportes',
-    icon: 'Insights',
-  },
-  {
-    label: 'Administración',
-    path: '/administracion',
-    icon: 'Settings',
-  },
-  {
-    label: 'Ayuda',
-    path: '/ayuda',
-    icon: 'HelpCenter',
-  },
+  // PANTALLAS OCULTAS TEMPORALMENTE PARA LA REUNIÓN
+  // Descomentar después de la reunión con el cliente
+  // {
+  //   label: 'Clientes',
+  //   path: '/clientes',
+  //   icon: 'People',
+  // },
+  // {
+  //   label: 'Proveedores',
+  //   path: '/proveedores',
+  //   icon: 'LocalShipping',
+  // },
+  // {
+  //   label: 'Reportes',
+  //   path: '/reportes',
+  //   icon: 'Insights',
+  // },
+  // {
+  //   label: 'Administración',
+  //   path: '/administracion',
+  //   icon: 'Settings',
+  // },
+  // {
+  //   label: 'Ayuda',
+  //   path: '/ayuda',
+  //   icon: 'HelpCenter',
+  // },
 ];

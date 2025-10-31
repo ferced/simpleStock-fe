@@ -70,8 +70,9 @@ export const InvoiceListPage = () => {
           </Stack>
         }
       />
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
+      <Box>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={8}>
           <Card>
             <CardContent>
               <Stack spacing={3}>
@@ -96,20 +97,18 @@ export const InvoiceListPage = () => {
                       <ListItemText
                         primary={`Factura ${invoice.id}`}
                         secondary={
-                          <Stack direction="row" justifyContent="space-between">
-                            <Typography variant="body2" color="text.secondary">
-                              {dayjs(invoice.createdAt).format('DD MMM YYYY')} · Vence {dayjs(invoice.dueDate).format('DD MMM')}
-                            </Typography>
-                            <Typography variant="body2" fontWeight={600}>
-                              ${invoice.total.toLocaleString('es-AR')}
-                            </Typography>
-                          </Stack>
+                          <Typography variant="body2" color="text.secondary">
+                            {dayjs(invoice.createdAt).format('DD MMM YYYY')} · Vence {dayjs(invoice.dueDate).format('DD MMM')}
+                          </Typography>
                         }
                       />
-                      <Chip label={statusMap[invoice.status].label} color={statusMap[invoice.status].color} variant="outlined" />
-                      <Box ml={2}>
+                      <Stack direction="row" spacing={2} alignItems="center">
+                        <Typography variant="body1" fontWeight={600}>
+                          ${invoice.total.toLocaleString('es-AR')}
+                        </Typography>
+                        <Chip label={statusMap[invoice.status].label} color={statusMap[invoice.status].color} variant="outlined" />
                         <Button size="small">Ver detalle</Button>
-                      </Box>
+                      </Stack>
                     </ListItem>
                   ))}
                 </List>
@@ -153,6 +152,7 @@ export const InvoiceListPage = () => {
           </Card>
         </Grid>
       </Grid>
+      </Box>
     </Stack>
   );
 };

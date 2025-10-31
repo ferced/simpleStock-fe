@@ -63,8 +63,9 @@ export const InventoryOverviewPage = () => {
           </Stack>
         }
       />
-      <Grid container spacing={3}>
-        {snapshots.map((snapshot) => (
+      <Box>
+        <Grid container spacing={3}>
+          {snapshots.map((snapshot) => (
           <Grid item xs={12} md={6} key={snapshot.id}>
             <Card>
               <CardContent>
@@ -99,7 +100,8 @@ export const InventoryOverviewPage = () => {
             </Card>
           </Grid>
         ))}
-      </Grid>
+        </Grid>
+      </Box>
       <Card>
         <CardContent>
           <SectionHeader title="Movimientos recientes" subtitle="Últimas entradas, salidas y transferencias" />
