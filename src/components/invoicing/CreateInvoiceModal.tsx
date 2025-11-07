@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
 import {
-  Box,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
   Button,
-  Card,
-  CardContent,
-  CardHeader,
   Divider,
   Grid,
   Snackbar,
@@ -21,13 +21,21 @@ import {
   TableCell,
   TableBody,
   MenuItem,
+  IconButton,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { clients, products } from '../../mocks/data';
 import type { Client, InvoiceFormData, InvoiceItem, Product } from '../../types';
 
 type StepKey = 0 | 1 | 2 | 3 | 4;
 
-export const CreateInvoicePage = () => {
+interface CreateInvoiceModalProps {
+  open: boolean;
+  onClose: () => void;
+  onSuccess?: () => void;
+}
+
+export const CreateInvoiceModal = ({ open, onClose, onSuccess }: CreateInvoiceModalProps) => {
   const [activeStep, setActiveStep] = useState<StepKey>(0);
   const [toastOpen, setToastOpen] = useState(false);
 
@@ -76,32 +84,41 @@ export const CreateInvoicePage = () => {
   const next = () => setActiveStep((s) => (s < 4 ? ((s + 1) as StepKey) : s));
   const back = () => setActiveStep((s) => (s > 0 ? ((s - 1) as StepKey) : s));
 
+  const handleClose = () => {
+    // Reset form
+    setActiveStep(0);
+    setSelectedClient(null);
+    setItems([]);
+    setPaymentTerms('cash');
+    setTotalDiscount('');
+    setNotes('');
+    onClose();
+  };
+
   const submit = async () => {
     // TODO: await apiClient.post('/invoices', { clientId, items, paymentTerms, totalDiscount, notes })
     await new Promise((r) => setTimeout(r, 700));
     setToastOpen(true);
-    // In real impl, navigate to detalle de factura
+    if (onSuccess) onSuccess();
+    setTimeout(() => {
+      handleClose();
+    }, 1500);
   };
 
   return (
-    <Box p={3}>
-      <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h5">Crear Factura</Typography>
-        <Stack direction="row" spacing={1}>
-          <Button variant="outlined" onClick={back} disabled={activeStep === 0}>Atrás</Button>
-          {activeStep < 4 ? (
-            <Button variant="contained" onClick={next} disabled={!canNext}>Siguiente</Button>
-          ) : (
-            <Button variant="contained" onClick={submit}>Generar Factura</Button>
-          )}
-        </Stack>
-      </Stack>
-
-      <Card>
-        <CardHeader title="Asistente" />
+    <>
+      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+        <DialogTitle>
+          <Stack direction="row" justifyContent="space-between" alignItems="center">
+            Crear Factura
+            <IconButton onClick={handleClose} size="small">
+              <CloseIcon />
+            </IconButton>
+          </Stack>
+        </DialogTitle>
         <Divider />
-        <CardContent>
-          <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 3 }}>
+        <DialogContent>
+          <Stepper activeStep={activeStep} alternativeLabel sx={{ mb: 3, mt: 2 }}>
             <Step><StepLabel>Cliente</StepLabel></Step>
             <Step><StepLabel>Productos</StepLabel></Step>
             <Step><StepLabel>Descuentos</StepLabel></Step>
@@ -111,7 +128,7 @@ export const CreateInvoicePage = () => {
 
           {activeStep === 0 && (
             <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12}>
                 <TextField
                   select
                   fullWidth
@@ -130,7 +147,7 @@ export const CreateInvoicePage = () => {
 
           {activeStep === 1 && (
             <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12}>
                 <TextField
                   select
                   fullWidth
@@ -176,7 +193,7 @@ export const CreateInvoicePage = () => {
                         </TableCell>
                         <TableCell align="right">${(i.price * i.quantity).toLocaleString('es-AR')}</TableCell>
                         <TableCell align="right">
-                          <Button color="error" onClick={() => removeItem(i.productId)}>Eliminar</Button>
+                          <Button color="error" size="small" onClick={() => removeItem(i.productId)}>Eliminar</Button>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -191,7 +208,7 @@ export const CreateInvoicePage = () => {
 
           {activeStep === 2 && (
             <Grid container spacing={2}>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={6}>
                 <TextField
                   label="Descuento total ($)"
                   type="text"
@@ -229,7 +246,7 @@ export const CreateInvoicePage = () => {
 
           {activeStep === 3 && (
             <Grid container spacing={2}>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={6}>
                 <TextField select fullWidth label="Método de pago" value={paymentTerms} onChange={(e) => setPaymentTerms(e.target.value as any)}>
                   <MenuItem value="cash">Contado</MenuItem>
                   <MenuItem value="transfer">Transferencia</MenuItem>
@@ -257,15 +274,22 @@ export const CreateInvoicePage = () => {
               <Typography fontWeight={600}>Total: ${totals.total.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
             </Stack>
           )}
-        </CardContent>
-      </Card>
+        </DialogContent>
+        <Divider />
+        <DialogActions>
+          <Button onClick={handleClose}>Cancelar</Button>
+          <Button variant="outlined" onClick={back} disabled={activeStep === 0}>Atrás</Button>
+          {activeStep < 4 ? (
+            <Button variant="contained" onClick={next} disabled={!canNext}>Siguiente</Button>
+          ) : (
+            <Button variant="contained" onClick={submit}>Generar Factura</Button>
+          )}
+        </DialogActions>
+      </Dialog>
 
       <Snackbar open={toastOpen} autoHideDuration={2500} onClose={() => setToastOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
         <Alert severity="success" variant="filled" sx={{ width: '100%' }}>Factura creada correctamente</Alert>
       </Snackbar>
-    </Box>
+    </>
   );
 };
-
-export default CreateInvoicePage;
-
