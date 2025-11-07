@@ -230,7 +230,9 @@ export const CategoriesPage = () => {
       </Dialog>
 
       <Snackbar open={!!toast?.open} autoHideDuration={2500} onClose={() => setToast(null)} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-        {toast ? <Alert severity={toast.severity} variant="filled" sx={{ width: '100%' }}>{toast.message}</Alert> : null}
+        <Alert severity={toast?.severity ?? 'success'} variant="filled" sx={{ width: '100%' }}>
+          {toast?.message ?? ''}
+        </Alert>
       </Snackbar>
     </Box>
   );
