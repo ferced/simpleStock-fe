@@ -143,4 +143,6 @@ vite.config.ts.timestamp-*
 .mcp-auth/
 .mcp/linear-config.json
 linear-backups/
-create_linear_tasks.js
+.claude/
+create-linear-tasks.js
+setup-linear-mcp.sh
