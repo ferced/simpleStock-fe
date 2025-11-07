@@ -14,16 +14,16 @@ export const NAV_CONFIG: NavItemConfig[] = [
     enabled: true,
     children: [
       { label: 'Listado', path: '/productos', enabled: true },
-      { label: 'Categorías', path: '/productos/categorias', enabled: false },
+      { label: 'Categorías', path: '/productos/categorias', enabled: true },
     ],
   },
   { label: 'Inventario', path: '/inventario', icon: 'Warehouse', enabled: true },
   { label: 'Facturación', path: '/facturacion', icon: 'ReceiptLong', enabled: true },
-  { label: 'Clientes', path: '/clientes', icon: 'People', enabled: false },
-  { label: 'Proveedores', path: '/proveedores', icon: 'LocalShipping', enabled: false },
-  { label: 'Reportes', path: '/reportes', icon: 'Insights', enabled: false },
-  { label: 'Administración', path: '/administracion', icon: 'Settings', enabled: false },
-  { label: 'Ayuda', path: '/ayuda', icon: 'HelpCenter', enabled: false },
+  { label: 'Clientes', path: '/clientes', icon: 'People', enabled: true },
+  { label: 'Proveedores', path: '/proveedores', icon: 'LocalShipping', enabled: true },
+  { label: 'Reportes', path: '/reportes', icon: 'Insights', enabled: true },
+  { label: 'Administración', path: '/administracion', icon: 'Settings', enabled: true },
+  { label: 'Ayuda', path: '/ayuda', icon: 'HelpCenter', enabled: true },
 ];
 
 export function getEnabledNavigation(): NavItem[] {
