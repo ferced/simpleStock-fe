@@ -19,6 +19,7 @@ import {
   Typography,
 } from '@mui/material';
 import type { InvoiceDetail, Payment } from '../../types';
+import { RegisterPaymentModal } from '../../components/invoicing/RegisterPaymentModal';
 
 const buildMockDetail = (id: string): InvoiceDetail => ({
   id,
@@ -49,6 +50,7 @@ export const InvoiceDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState<InvoiceDetail | null>(null);
+  const [paymentOpen, setPaymentOpen] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -90,7 +92,7 @@ export const InvoiceDetailPage = () => {
           <Button variant="outlined" onClick={() => window.print()}>Imprimir</Button>
           <Button variant="outlined">Exportar PDF</Button>
           <Button variant="outlined">Enviar</Button>
-          <Button variant="contained" disabled={balance === 0} onClick={() => alert('Registrar pago (mock)')}>Registrar Pago</Button>
+          <Button variant="contained" disabled={balance === 0} onClick={() => setPaymentOpen(true)}>Registrar Pago</Button>
           {data.status === 'draft' && <Button onClick={() => navigate(`/facturacion/${data.id}/editar`)}>Editar</Button>}
         </Stack>
       </Stack>
@@ -188,6 +190,17 @@ export const InvoiceDetailPage = () => {
           </Card>
         </Grid>
       </Grid>
+      <RegisterPaymentModal
+        open={paymentOpen}
+        onClose={() => setPaymentOpen(false)}
+        invoiceTotal={data.total}
+        paidAmount={paidAmount}
+        onConfirm={(p) => {
+          // mock append payment
+          setData((prev) => prev ? { ...prev, payments: [...prev.payments, { id: `pay-${Date.now()}`, invoiceId: prev.id, amount: p.amount, method: p.method, reference: p.reference, createdAt: new Date().toISOString() }] } : prev);
+          setPaymentOpen(false);
+        }}
+      />
     </Box>
   );
 };
