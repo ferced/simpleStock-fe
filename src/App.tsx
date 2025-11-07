@@ -11,6 +11,7 @@ import { MainDashboard } from './pages/dashboard/MainDashboard';
 import { ProductListPage } from './pages/products/ProductListPage';
 import { InventoryOverviewPage } from './pages/inventory/InventoryOverviewPage';
 import { InvoiceListPage } from './pages/invoicing/InvoiceListPage';
+import { CreateInvoicePage } from './pages/invoicing/CreateInvoicePage';
 import { ClientListPage } from './pages/clients/ClientListPage';
 import { CreateClientPage } from './pages/clients/CreateClientPage';
 import { EditClientPage } from './pages/clients/EditClientPage';
@@ -56,6 +57,7 @@ export const App = () => (
             <Route path="productos/categorias" element={<CategoriesPage />} />
             <Route path="inventario" element={<InventoryOverviewPage />} />
             <Route path="facturacion" element={<InvoiceListPage />} />
+            <Route path="facturacion/nueva" element={<CreateInvoicePage />} />
             <Route path="clientes" element={<ClientListPage />} />
             <Route path="clientes/nuevo" element={<CreateClientPage />} />
             <Route path="clientes/:id/editar" element={<EditClientPage />} />
