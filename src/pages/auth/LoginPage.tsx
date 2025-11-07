@@ -4,6 +4,7 @@ import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthLayout } from '../../components/layout/AuthLayout';
 import type { AuthFormValues } from '../../types';
+import { useAuth } from '../../contexts/AuthContext';
 
 const initialValues: AuthFormValues = {
   email: '',
@@ -13,6 +14,7 @@ const initialValues: AuthFormValues = {
 
 export const LoginPage = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [values, setValues] = useState<AuthFormValues>(initialValues);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,13 +23,15 @@ export const LoginPage = () => {
       setValues((prev) => ({ ...prev, [field]: event.target.type === 'checkbox' ? event.target.checked : event.target.value }));
     };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      await login(values);
       navigate('/');
-    }, 650);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
