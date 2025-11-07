@@ -230,11 +230,11 @@ export const CreateInvoicePage = () => {
           {activeStep === 3 && (
             <Grid container spacing={2}>
               <Grid item xs={12} md={4}>
-                <TextField select fullWidth label="Método de pago" value={paymentTerms} onChange={(e) => setPaymentTerms(e.target.value as any)}>
+                <TextField select fullWidth label="Términos de pago" value={paymentTerms} onChange={(e) => setPaymentTerms(e.target.value as any)}>
                   <MenuItem value="cash">Contado</MenuItem>
-                  <MenuItem value="transfer">Transferencia</MenuItem>
-                  <MenuItem value="credit">Crédito</MenuItem>
-                  <MenuItem value="check">Cheque</MenuItem>
+                  <MenuItem value="30days">30 días</MenuItem>
+                  <MenuItem value="60days">60 días</MenuItem>
+                  <MenuItem value="90days">90 días</MenuItem>
                 </TextField>
               </Grid>
               <Grid item xs={12}>
@@ -248,11 +248,11 @@ export const CreateInvoicePage = () => {
               <Typography variant="subtitle1">Resumen</Typography>
               <Typography variant="body2">Cliente: {selectedClient ? `${selectedClient.name} — ${selectedClient.email}` : '-'}</Typography>
               <Typography variant="body2">Items: {items.length}</Typography>
-              <Typography variant="body2">Método de pago: {
+              <Typography variant="body2">Términos de pago: {
                 paymentTerms === 'cash' ? 'Contado' :
-                paymentTerms === 'transfer' ? 'Transferencia' :
-                paymentTerms === 'credit' ? 'Crédito' :
-                paymentTerms === 'check' ? 'Cheque' : paymentTerms
+                paymentTerms === '30days' ? '30 días' :
+                paymentTerms === '60days' ? '60 días' :
+                paymentTerms === '90days' ? '90 días' : paymentTerms
               }</Typography>
               <Typography fontWeight={600}>Total: ${totals.total.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Typography>
             </Stack>
