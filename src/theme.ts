@@ -22,12 +22,12 @@ const theme = createTheme({
     borderRadius: 14,
   },
   typography: {
-    fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'Poppins, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     h4: {
       fontWeight: 700,
     },
     h5: {
-      fontWeight: 600,
+      fontWeight: 700,
     },
   },
   components: {

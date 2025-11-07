@@ -8,12 +8,29 @@ import {
   ListItemText,
   Stack,
   Typography,
+  Avatar,
 } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import * as Icons from '@mui/icons-material';
 import { navigationItems } from '../../constants/navigation';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
 const drawerWidth = 264;
+
+const BrandIcon = () => (
+  <Avatar
+    variant="rounded"
+    sx={{
+      width: 32,
+      height: 32,
+      bgcolor: 'rgba(18,163,184,0.12)',
+      color: 'primary.main',
+      border: '1px solid rgba(18,163,184,0.25)',
+    }}
+  >
+    <TrendingUpIcon fontSize="small" />
+  </Avatar>
+);
 
 const resolveIcon = (iconName?: string) => {
   if (!iconName) return null;
@@ -34,9 +51,15 @@ export const Sidebar = ({ mobileOpen, onClose }: SidebarProps) => {
     <Stack height="100%" justifyContent="space-between">
       <Box>
         <Stack direction="row" alignItems="center" spacing={1.5} px={2} py={3}>
-          <Typography variant="h6" fontWeight={700} color="primary.main">
-            SimpleStock
-          </Typography>
+          <BrandIcon />
+          <Box>
+            <Typography variant="h6" sx={{ fontWeight: 800, lineHeight: 1, letterSpacing: 0.5, color: 'primary.main' }}>
+              SUMA
+            </Typography>
+            <Typography variant="caption" sx={{ display: 'block', mt: -0.2, letterSpacing: 2, color: 'text.secondary' }}>
+              GESTIÓN
+            </Typography>
+          </Box>
         </Stack>
         <Divider sx={{ mx: 2 }} />
         <List>
@@ -69,7 +92,7 @@ export const Sidebar = ({ mobileOpen, onClose }: SidebarProps) => {
       </Box>
       <Box px={3} py={2}>
         <Typography variant="caption" color="text.secondary">
-          © {new Date().getFullYear()} SimpleStock. Administra tu inventario con claridad.
+          © {new Date().getFullYear()} Suma Gestión. Administra tu inventario con claridad.
         </Typography>
       </Box>
     </Stack>
