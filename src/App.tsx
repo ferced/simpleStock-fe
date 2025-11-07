@@ -12,6 +12,8 @@ import { ProductListPage } from './pages/products/ProductListPage';
 import { InventoryOverviewPage } from './pages/inventory/InventoryOverviewPage';
 import { InvoiceListPage } from './pages/invoicing/InvoiceListPage';
 import { ClientListPage } from './pages/clients/ClientListPage';
+import { CreateClientPage } from './pages/clients/CreateClientPage';
+import { EditClientPage } from './pages/clients/EditClientPage';
 import { SupplierListPage } from './pages/suppliers/SupplierListPage';
 import { ReportsPage } from './pages/reports/ReportsPage';
 import { AdminPage } from './pages/admin/AdminPage';
@@ -55,6 +57,8 @@ export const App = () => (
             <Route path="inventario" element={<InventoryOverviewPage />} />
             <Route path="facturacion" element={<InvoiceListPage />} />
             <Route path="clientes" element={<ClientListPage />} />
+            <Route path="clientes/nuevo" element={<CreateClientPage />} />
+            <Route path="clientes/:id/editar" element={<EditClientPage />} />
             <Route path="proveedores" element={<SupplierListPage />} />
             <Route path="reportes" element={<ReportsPage />} />
             <Route path="administracion" element={<AdminPage />} />
