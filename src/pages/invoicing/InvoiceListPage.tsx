@@ -21,6 +21,7 @@ import {
 import dayjs from 'dayjs';
 import { useEffect, useMemo, useState } from 'react';
 import { SectionHeader } from '../../components/common/SectionHeader';
+import { CreateInvoiceModal } from '../../components/invoicing/CreateInvoiceModal';
 import { invoicingService } from '../../services/mockApi';
 import type { Invoice, PaymentReminder } from '../../types';
 
@@ -36,6 +37,7 @@ export const InvoiceListPage = () => {
   const [reminders, setReminders] = useState<PaymentReminder[]>([]);
   const [statusFilter, setStatusFilter] = useState<'all' | Invoice['status']>('all');
   const [isLoading, setIsLoading] = useState(true);
+  const [createModalOpen, setCreateModalOpen] = useState(false);
 
   useEffect(() => {
     const loadInvoicing = async () => {
@@ -66,7 +68,7 @@ export const InvoiceListPage = () => {
             <Button variant="outlined" startIcon={<PictureAsPdfIcon />}>
               Exportar PDF
             </Button>
-            <Button variant="contained">Crear factura</Button>
+            <Button variant="contained" onClick={() => setCreateModalOpen(true)}>Crear factura</Button>
           </Stack>
         }
       />
@@ -153,6 +155,23 @@ export const InvoiceListPage = () => {
         </Grid>
       </Grid>
       </Box>
+
+      <CreateInvoiceModal
+        open={createModalOpen}
+        onClose={() => setCreateModalOpen(false)}
+        onSuccess={() => {
+          // Recargar facturas después de crear una nueva
+          const loadInvoicing = async () => {
+            const [invoiceData, reminderData] = await Promise.all([
+              invoicingService.getInvoices(),
+              invoicingService.getReminders(),
+            ]);
+            setInvoices(invoiceData);
+            setReminders(reminderData);
+          };
+          loadInvoicing();
+        }}
+      />
     </Stack>
   );
 };

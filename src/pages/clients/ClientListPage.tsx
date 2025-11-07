@@ -154,7 +154,22 @@ export const ClientListPage = () => {
                 {isLoading ? <LinearProgress /> : null}
                 <List>
                   {paginated.map((client) => (
-                    <ListItem key={client.id} alignItems="flex-start" sx={{ cursor: 'pointer' }} onClick={() => navigate(`/clientes/${client.id}`)}>
+                    <ListItem
+                      key={client.id}
+                      alignItems="flex-start"
+                      sx={{
+                        cursor: 'pointer',
+                        border: '1px solid',
+                        borderColor: 'divider',
+                        borderRadius: 2,
+                        mb: 2,
+                        py: 2,
+                        '&:hover': {
+                          backgroundColor: 'action.hover'
+                        }
+                      }}
+                      onClick={() => navigate(`/clientes/${client.id}`)}
+                    >
                       <ListItemAvatar>
                         <Avatar sx={{ bgcolor: 'secondary.light', color: 'secondary.dark' }}>
                           {client.name.charAt(0)}
