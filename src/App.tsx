@@ -17,6 +17,7 @@ import { ReportsPage } from './pages/reports/ReportsPage';
 import { AdminPage } from './pages/admin/AdminPage';
 import { HelpPage } from './pages/help/HelpPage';
 import { CreateProductPage } from './pages/products/CreateProductPage';
+import { ProductDetailPage } from './pages/products/ProductDetailPage';
 import theme from './theme';
 
 export const App = () => (
@@ -46,6 +47,7 @@ export const App = () => (
             <Route index element={<MainDashboard />} />
             <Route path="productos" element={<ProductListPage />} />
             <Route path="productos/nuevo" element={<CreateProductPage />} />
+            <Route path="productos/:id" element={<ProductDetailPage />} />
             <Route path="inventario" element={<InventoryOverviewPage />} />
             <Route path="facturacion" element={<InvoiceListPage />} />
             <Route path="clientes" element={<ClientListPage />} />
