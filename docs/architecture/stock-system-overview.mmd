@@ -1,0 +1,118 @@
+---
+config:
+  layout: elk
+---
+flowchart TB
+    Start(["Sistema de Stock e Inventario"]) --> Auth["Autenticación"]
+    Auth --> Login["Pantalla de Login"] & Register["Pantalla de Registro"] & ForgotPass["Recuperar Contraseña"] & ResetPass["Restablecer Contraseña"]
+    Login --> MainDash["Dashboard Principal"]
+    MainDash --> DashWidgets["Widgets Dashboard"] & Products["Gestión de Productos"] & Inventory["Control de Inventario"] & Invoicing["Facturación"] & Clients["Gestión de Clientes"] & Suppliers["Gestión de Proveedores"] & Reports["Reportes y Análisis"] & Admin["Administración"] & Help["Ayuda y Soporte"]
+    DashWidgets --> StockAlerts["Alertas de Stock Bajo"] & SalesGraph["Gráfico de Ventas"] & TopProducts["Productos Más Vendidos"] & PendingInvoices["Facturas Pendientes"] & QuickStats["Estadísticas Rápidas"] & RecentMovements["Movimientos Recientes"]
+    Products --> ProductList["Listado de Productos"] & ProductCreate["Crear Producto"] & ProductEdit["Editar Producto"] & ProductDetail["Detalle de Producto"] & Categories["Gestión de Categorías"] & BarcodeManagement["Gestión de Códigos"]
+    ProductList --> ProductSearch["Búsqueda/Filtros"] & ProductGrid["Vista Grid/Lista"]
+    ProductCreate --> BasicInfo["Info Básica"]
+    BasicInfo --> ProdName["Nombre/Código"] & ProdCategory["Categoría"] & ProdPrice["Precios"] & ProdTax["Impuestos"]
+    ProductEdit --> EditStock["Ajustar Stock"] & EditPrices["Modificar Precios"] & EditSuppliers["Vincular Proveedores"]
+    ProductDetail --> StockHistory["Historial de Stock"] & PriceHistory["Historial de Precios"] & MovementLog["Log de Movimientos"]
+    Categories --> CatList["Lista de Categorías"] & CatCreate["Crear Categoría"] & CatEdit["Editar Categoría"]
+    BarcodeManagement --> BarcodeGenerator["Generar Códigos de Barras"] & BarcodeScanner["Escanear Códigos"] & TagManagement["Gestión de Etiquetas"]
+    Inventory --> StockOverview["Vista General de Stock"] & StockMovements["Movimientos de Stock"] & StockCount["Conteo de Inventario"]
+    StockOverview --> StockByCategory["Stock por Categoría"] & StockByLocation["Stock por Ubicación"] & StockValuation["Valorización de Stock"]
+    StockMovements --> StockEntry["Entrada de Stock"] & StockExit["Salida de Stock"] & StockTransfer["Transferencias"]
+    StockEntry --> PurchaseEntry["Entrada por Compra"] & AdjustmentEntry["Entrada por Ajuste"] & ReturnEntry["Entrada por Devolución"]
+    StockExit --> SalesExit["Salida por Venta"] & AdjustmentExit["Salida por Ajuste"] & DamageExit["Salida por Daño"]
+    StockTransfer --> TransferBetweenLocations["Entre Ubicaciones"] & TransferHistory["Historial de Transferencias"]
+    StockCount --> PhysicalCount["Conteo Físico"] & CycleCount["Conteo Cíclico"] & CountDiscrepancies["Discrepancias"]
+    Invoicing --> InvoiceList["Lista de Facturas"] & CreateInvoice["Crear Factura"] & InvoiceDetail["Detalle de Factura"] & PaymentTracking["Seguimiento de Pagos"] & CreditNotes["Notas de Crédito"]
+    InvoiceList --> InvoiceFilters["Filtros por Estado"] & InvoiceSearch["Búsqueda de Facturas"]
+    CreateInvoice --> SelectClient["Seleccionar Cliente"] & AddProducts["Agregar Productos"] & ApplyDiscounts["Aplicar Descuentos"] & SetPaymentTerms["Términos de Pago"] & GenerateInvoice["Generar Factura"]
+    InvoiceDetail --> InvoicePreview["Vista Previa"] & InvoiceImage["Exportar como Imagen"] & InvoicePDF["Exportar como PDF"] & InvoicePrint["Imprimir"] & SendInvoice["Enviar por Email"]
+    PaymentTracking --> RegisterPayment["Registrar Pago"] & PartialPayment["Pagos Parciales"] & PaymentHistory["Historial de Pagos"] & PendingPayments["Pagos Pendientes"]
+    CreditNotes --> CreateCreditNote["Crear Nota de Crédito"] & CreditNoteList["Lista de Notas"]
+    Clients --> ClientList["Lista de Clientes"] & ClientCreate["Crear Cliente"] & ClientDetail["Detalle de Cliente"] & ClientEdit["Editar Cliente"] & ClientStatement["Estado de Cuenta"]
+    ClientList --> ClientSearch["Búsqueda de Clientes"] & ClientFilters["Filtros de Clientes"]
+    ClientCreate --> ClientBasicInfo["Información Básica"] & ClientContact["Info de Contacto"] & ClientBilling["Info de Facturación"] & ClientCreditLimit["Límite de Crédito"]
+    ClientDetail --> ClientTransactions["Historial de Transacciones"] & ClientInvoices["Facturas del Cliente"] & ClientBalance["Estado de Cuenta"] & ClientProducts["Productos Comprados"] & ClientStatistics["Estadísticas del Cliente"]
+    ClientStatement --> AccountSummary["Resumen de Cuenta"] & AgingReport["Reporte de Antigüedad"]
+    Suppliers --> SupplierList["Lista de Proveedores"] & SupplierCreate["Crear Proveedor"] & SupplierDetail["Detalle de Proveedor"] & PurchaseOrders["Órdenes de Compra"]
+    SupplierList --> SupplierSearch["Búsqueda"] & SupplierFilters["Filtros"]
+    SupplierCreate --> SupplierInfo["Información del Proveedor"] & SupplierProducts["Productos que Provee"] & SupplierTerms["Términos Comerciales"]
+    SupplierDetail --> PurchaseHistory["Historial de Compras"] & SupplierCatalog["Catálogo de Productos"] & SupplierOrders["Órdenes de Compra"] & SupplierPayments["Pagos a Proveedor"]
+    PurchaseOrders --> CreatePO["Crear Orden de Compra"] & POList["Lista de Órdenes"] & POApproval["Aprobación de Órdenes"] & ReceiveGoods["Recepción de Mercancía"]
+    Reports --> SalesReports["Reportes de Ventas"] & InventoryReports["Reportes de Inventario"] & FinancialReports["Reportes Financieros"] & AnalyticsDashboard["Dashboard Analítico"]
+    SalesReports --> DailySales["Ventas Diarias"] & MonthlySales["Ventas Mensuales"] & SalesByProduct["Ventas por Producto"] & SalesByClient["Ventas por Cliente"] & SalesByCategory["Ventas por Categoría"]
+    InventoryReports --> StockReport["Reporte de Stock"] & LowStockReport["Productos con Stock Bajo"] & StockMovementReport["Reporte de Movimientos"] & StockValuationReport["Valorización de Inventario"] & DeadStockReport["Stock Muerto"]
+    FinancialReports --> IncomeReport["Reporte de Ingresos"] & ExpenseReport["Reporte de Gastos"] & ProfitReport["Reporte de Ganancias"] & CashFlowReport["Flujo de Caja"] & AccountsReceivable["Cuentas por Cobrar"] & AccountsPayable["Cuentas por Pagar"]
+    AnalyticsDashboard --> TrendAnalysis["Análisis de Tendencias"] & ForecastingView["Pronósticos"] & KPIMonitoring["Monitoreo de KPIs"]
+    Admin --> UserManagement["Gestión de Usuarios"] & RoleManagement["Gestión de Roles"] & SystemSettings["Configuración del Sistema"] & BackupRestore["Respaldo y Restauración"] & AuditLog["Log de Auditoría"]
+    UserManagement --> UserList["Lista de Usuarios"] & CreateUser["Crear Usuario"] & EditUser["Editar Usuario"] & UserPermissions["Permisos de Usuario"] & UserActivity["Actividad de Usuarios"]
+    RoleManagement --> RoleList["Lista de Roles"] & CreateRole["Crear Rol"] & RolePermissions["Permisos por Rol"]
+    SystemSettings --> GeneralSettings["Config. General"] & InvoiceSettings["Config. de Facturación"] & NotificationSettings["Config. de Notificaciones"]
+    GeneralSettings --> CompanyInfo["Info de la Empresa"] & TaxSettings["Configuración de Impuestos"] & CurrencySettings["Configuración de Moneda"]
+    InvoiceSettings --> InvoiceTemplate["Plantilla de Factura"] & NumberingScheme["Esquema de Numeración"] & PaymentMethods["Métodos de Pago"]
+    NotificationSettings --> EmailSettings["Config. de Email"] & AlertSettings["Config. de Alertas"]
+    BackupRestore --> CreateBackup["Crear Respaldo"] & RestoreBackup["Restaurar Respaldo"] & BackupSchedule["Programar Respaldos"]
+    AuditLog --> UserActions["Acciones de Usuarios"] & SystemEvents["Eventos del Sistema"] & SecurityLog["Log de Seguridad"]
+    Help --> UserGuide["Guía de Usuario"] & VideoTutorials["Tutoriales en Video"] & FAQ["Preguntas Frecuentes"] & Support["Contactar Soporte"] & SystemInfo["Información del Sistema"]
+    ProdPrice --> n1["Untitled Node"]
+     Auth:::authClass
+     Login:::authClass
+     Register:::authClass
+     ForgotPass:::authClass
+     ResetPass:::authClass
+     Products:::productClass
+     Inventory:::inventoryClass
+     Invoicing:::invoiceClass
+     Clients:::clientClass
+     Suppliers:::supplierClass
+     Reports:::reportClass
+     Admin:::adminClass
+     Help:::helpClass
+     ProductList:::productClass
+     ProductCreate:::productClass
+     ProductEdit:::productClass
+     ProductDetail:::productClass
+     Categories:::productClass
+     BarcodeManagement:::productClass
+     StockOverview:::inventoryClass
+     StockMovements:::inventoryClass
+     StockCount:::inventoryClass
+     InvoiceList:::invoiceClass
+     CreateInvoice:::invoiceClass
+     InvoiceDetail:::invoiceClass
+     PaymentTracking:::invoiceClass
+     CreditNotes:::invoiceClass
+     ClientList:::clientClass
+     ClientCreate:::clientClass
+     ClientDetail:::clientClass
+     ClientEdit:::clientClass
+     ClientStatement:::clientClass
+     SupplierList:::supplierClass
+     SupplierCreate:::supplierClass
+     SupplierDetail:::supplierClass
+     PurchaseOrders:::supplierClass
+     SalesReports:::reportClass
+     InventoryReports:::reportClass
+     FinancialReports:::reportClass
+     AnalyticsDashboard:::reportClass
+     UserManagement:::adminClass
+     RoleManagement:::adminClass
+     SystemSettings:::adminClass
+     BackupRestore:::adminClass
+     AuditLog:::adminClass
+     UserGuide:::helpClass
+     VideoTutorials:::helpClass
+     FAQ:::helpClass
+     Support:::helpClass
+    classDef authClass fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef productClass fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef inventoryClass fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    classDef invoiceClass fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef clientClass fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef supplierClass fill:#e0f2f1,stroke:#00796b,stroke-width:2px
+    classDef reportClass fill:#f1f8e9,stroke:#689f38,stroke-width:2px
+    classDef adminClass fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef helpClass fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+
+
+

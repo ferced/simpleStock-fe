@@ -137,3 +137,10 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+.vercel
+
+# Linear integration
+.mcp-auth/
+.mcp/linear-config.json
+linear-backups/
+create_linear_tasks.js
