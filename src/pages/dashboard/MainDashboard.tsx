@@ -4,6 +4,8 @@ import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import PeopleIcon from '@mui/icons-material/People';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import {
   Avatar,
   Box,
@@ -174,6 +176,161 @@ export const MainDashboard = () => {
           </Card>
         </Grid>
       </Grid>
+
+      {/* Widget de Facturas Pendientes */}
+      <Card>
+        <CardContent>
+          <Stack spacing={3}>
+            <SectionHeader
+              title="Facturas Pendientes"
+              subtitle="Facturas próximas a vencer o vencidas"
+              action={<Chip label="5 pendientes" color="warning" />}
+            />
+            <List>
+              <ListItem sx={{ borderRadius: 2, mb: 1, bgcolor: 'error.lighter' }}>
+                <ListItemAvatar>
+                  <Avatar sx={{ bgcolor: 'error.main' }}>
+                    <ReceiptIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <Stack direction="row" spacing={1} alignItems="center">
+                      <Typography variant="body1" fontWeight={600}>
+                        FC-00234
+                      </Typography>
+                      <Chip label="Vencida" size="small" color="error" />
+                    </Stack>
+                  }
+                  secondary={
+                    <Stack spacing={0.5}>
+                      <Typography variant="body2" color="text.secondary">
+                        Cliente: Techno Solutions SA
+                      </Typography>
+                      <Typography variant="caption" color="text.disabled">
+                        Vencimiento: {dayjs().subtract(5, 'days').format('DD/MM/YYYY')} • Monto: $125,450
+                      </Typography>
+                    </Stack>
+                  }
+                />
+              </ListItem>
+
+              <ListItem sx={{ borderRadius: 2, mb: 1, bgcolor: 'warning.lighter' }}>
+                <ListItemAvatar>
+                  <Avatar sx={{ bgcolor: 'warning.main' }}>
+                    <AccessTimeIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <Stack direction="row" spacing={1} alignItems="center">
+                      <Typography variant="body1" fontWeight={600}>
+                        FC-00245
+                      </Typography>
+                      <Chip label="Vence hoy" size="small" color="warning" />
+                    </Stack>
+                  }
+                  secondary={
+                    <Stack spacing={0.5}>
+                      <Typography variant="body2" color="text.secondary">
+                        Cliente: Distribuidora El Norte
+                      </Typography>
+                      <Typography variant="caption" color="text.disabled">
+                        Vencimiento: {dayjs().format('DD/MM/YYYY')} • Monto: $89,200
+                      </Typography>
+                    </Stack>
+                  }
+                />
+              </ListItem>
+
+              <ListItem sx={{ borderRadius: 2, mb: 1 }}>
+                <ListItemAvatar>
+                  <Avatar sx={{ bgcolor: 'primary.light', color: 'primary.dark' }}>
+                    <ReceiptIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <Stack direction="row" spacing={1} alignItems="center">
+                      <Typography variant="body1" fontWeight={600}>
+                        FC-00247
+                      </Typography>
+                      <Chip label="3 días" size="small" color="default" variant="outlined" />
+                    </Stack>
+                  }
+                  secondary={
+                    <Stack spacing={0.5}>
+                      <Typography variant="body2" color="text.secondary">
+                        Cliente: Blue Hardware
+                      </Typography>
+                      <Typography variant="caption" color="text.disabled">
+                        Vencimiento: {dayjs().add(3, 'days').format('DD/MM/YYYY')} • Monto: $234,780
+                      </Typography>
+                    </Stack>
+                  }
+                />
+              </ListItem>
+
+              <ListItem sx={{ borderRadius: 2, mb: 1 }}>
+                <ListItemAvatar>
+                  <Avatar sx={{ bgcolor: 'primary.light', color: 'primary.dark' }}>
+                    <ReceiptIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <Stack direction="row" spacing={1} alignItems="center">
+                      <Typography variant="body1" fontWeight={600}>
+                        FC-00249
+                      </Typography>
+                      <Chip label="7 días" size="small" color="default" variant="outlined" />
+                    </Stack>
+                  }
+                  secondary={
+                    <Stack spacing={0.5}>
+                      <Typography variant="body2" color="text.secondary">
+                        Cliente: Comercial López
+                      </Typography>
+                      <Typography variant="caption" color="text.disabled">
+                        Vencimiento: {dayjs().add(7, 'days').format('DD/MM/YYYY')} • Monto: $67,500
+                      </Typography>
+                    </Stack>
+                  }
+                />
+              </ListItem>
+
+              <ListItem sx={{ borderRadius: 2 }}>
+                <ListItemAvatar>
+                  <Avatar sx={{ bgcolor: 'primary.light', color: 'primary.dark' }}>
+                    <ReceiptIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={
+                    <Stack direction="row" spacing={1} alignItems="center">
+                      <Typography variant="body1" fontWeight={600}>
+                        FC-00251
+                      </Typography>
+                      <Chip label="15 días" size="small" color="default" variant="outlined" />
+                    </Stack>
+                  }
+                  secondary={
+                    <Stack spacing={0.5}>
+                      <Typography variant="body2" color="text.secondary">
+                        Cliente: Servicios Integrales SRL
+                      </Typography>
+                      <Typography variant="caption" color="text.disabled">
+                        Vencimiento: {dayjs().add(15, 'days').format('DD/MM/YYYY')} • Monto: $145,890
+                      </Typography>
+                    </Stack>
+                  }
+                />
+              </ListItem>
+            </List>
+          </Stack>
+        </CardContent>
+      </Card>
+
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <Card>
