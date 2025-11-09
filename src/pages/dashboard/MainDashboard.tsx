@@ -1,7 +1,12 @@
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import TrendingDownIcon from '@mui/icons-material/TrendingDown';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import PeopleIcon from '@mui/icons-material/People';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import {
   Avatar,
+  Box,
   Card,
   CardContent,
   Chip,
@@ -54,6 +59,120 @@ export const MainDashboard = () => {
             <StatCard stat={stat} />
           </Grid>
         ))}
+      </Grid>
+
+      {/* Nuevas Estadísticas Rápidas */}
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={3}>
+          <Card>
+            <CardContent>
+              <Stack spacing={2}>
+                <Box display="flex" alignItems="center" gap={2}>
+                  <Avatar sx={{ bgcolor: 'primary.light', color: 'primary.dark' }}>
+                    <InventoryIcon />
+                  </Avatar>
+                  <Stack spacing={0}>
+                    <Typography variant="caption" color="text.secondary">
+                      Productos Activos
+                    </Typography>
+                    <Typography variant="h5" fontWeight={700}>
+                      247
+                    </Typography>
+                  </Stack>
+                </Box>
+                <Box display="flex" alignItems="center" gap={1}>
+                  <TrendingUpIcon fontSize="small" color="success" />
+                  <Typography variant="caption" color="success.main">
+                    +12 este mes
+                  </Typography>
+                </Box>
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} md={3}>
+          <Card>
+            <CardContent>
+              <Stack spacing={2}>
+                <Box display="flex" alignItems="center" gap={2}>
+                  <Avatar sx={{ bgcolor: 'success.light', color: 'success.dark' }}>
+                    <PeopleIcon />
+                  </Avatar>
+                  <Stack spacing={0}>
+                    <Typography variant="caption" color="text.secondary">
+                      Clientes Registrados
+                    </Typography>
+                    <Typography variant="h5" fontWeight={700}>
+                      89
+                    </Typography>
+                  </Stack>
+                </Box>
+                <Box display="flex" alignItems="center" gap={1}>
+                  <TrendingUpIcon fontSize="small" color="success" />
+                  <Typography variant="caption" color="success.main">
+                    +5 esta semana
+                  </Typography>
+                </Box>
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} md={3}>
+          <Card>
+            <CardContent>
+              <Stack spacing={2}>
+                <Box display="flex" alignItems="center" gap={2}>
+                  <Avatar sx={{ bgcolor: 'warning.light', color: 'warning.dark' }}>
+                    <LocalShippingIcon />
+                  </Avatar>
+                  <Stack spacing={0}>
+                    <Typography variant="caption" color="text.secondary">
+                      Proveedores
+                    </Typography>
+                    <Typography variant="h5" fontWeight={700}>
+                      23
+                    </Typography>
+                  </Stack>
+                </Box>
+                <Box display="flex" alignItems="center" gap={1}>
+                  <TrendingUpIcon fontSize="small" color="success" />
+                  <Typography variant="caption" color="success.main">
+                    +2 este mes
+                  </Typography>
+                </Box>
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} md={3}>
+          <Card>
+            <CardContent>
+              <Stack spacing={2}>
+                <Box display="flex" alignItems="center" gap={2}>
+                  <Avatar sx={{ bgcolor: 'error.light', color: 'error.dark' }}>
+                    <TrendingDownIcon />
+                  </Avatar>
+                  <Stack spacing={0}>
+                    <Typography variant="caption" color="text.secondary">
+                      Stock Crítico
+                    </Typography>
+                    <Typography variant="h5" fontWeight={700}>
+                      {alerts.length}
+                    </Typography>
+                  </Stack>
+                </Box>
+                <Box display="flex" alignItems="center" gap={1}>
+                  <Typography variant="caption" color="error.main">
+                    Requiere atención
+                  </Typography>
+                </Box>
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
