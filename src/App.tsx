@@ -23,6 +23,7 @@ import { ReportsPage } from './pages/reports/ReportsPage';
 import { AdminPage } from './pages/admin/AdminPage';
 import { HelpPage } from './pages/help/HelpPage';
 import { SystemInfoPage } from './pages/help/SystemInfoPage';
+import { ContactSupportPage } from './pages/help/ContactSupportPage';
 import { CreateProductPage } from './pages/products/CreateProductPage';
 import { ProductDetailPage } from './pages/products/ProductDetailPage';
 import { EditProductPage } from './pages/products/EditProductPage';
@@ -73,6 +74,7 @@ export const App = () => (
             <Route path="administracion" element={<AdminPage />} />
             <Route path="ayuda" element={<HelpPage />} />
             <Route path="ayuda/sistema" element={<SystemInfoPage />} />
+            <Route path="ayuda/soporte" element={<ContactSupportPage />} />
           </Route>
 
           {/* Ruta catch-all */}
