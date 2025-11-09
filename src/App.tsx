@@ -20,6 +20,7 @@ import { ClientDetailPage } from './pages/clients/ClientDetailPage';
 import { ClientStatementPage } from './pages/clients/ClientStatementPage';
 import { SupplierListPage } from './pages/suppliers/SupplierListPage';
 import { SupplierDetailPage } from './pages/suppliers/SupplierDetailPage';
+import { CreateEditSupplierPage } from './pages/suppliers/CreateEditSupplierPage';
 import { ReportsPage } from './pages/reports/ReportsPage';
 import { AdminPage } from './pages/admin/AdminPage';
 import { SystemSettingsPage } from './pages/admin/SystemSettingsPage';
@@ -73,6 +74,8 @@ export const App = () => (
             <Route path="clientes/:id" element={<ClientDetailPage />} />
             <Route path="clientes/:id/estado" element={<ClientStatementPage />} />
             <Route path="proveedores" element={<SupplierListPage />} />
+            <Route path="proveedores/nuevo" element={<CreateEditSupplierPage />} />
+            <Route path="proveedores/:id/editar" element={<CreateEditSupplierPage />} />
             <Route path="proveedores/:id" element={<SupplierDetailPage />} />
             <Route path="reportes" element={<ReportsPage />} />
             <Route path="administracion" element={<AdminPage />} />
