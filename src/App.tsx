@@ -24,6 +24,7 @@ import { AdminPage } from './pages/admin/AdminPage';
 import { HelpPage } from './pages/help/HelpPage';
 import { SystemInfoPage } from './pages/help/SystemInfoPage';
 import { ContactSupportPage } from './pages/help/ContactSupportPage';
+import { FAQPage } from './pages/help/FAQPage';
 import { CreateProductPage } from './pages/products/CreateProductPage';
 import { ProductDetailPage } from './pages/products/ProductDetailPage';
 import { EditProductPage } from './pages/products/EditProductPage';
@@ -75,6 +76,7 @@ export const App = () => (
             <Route path="ayuda" element={<HelpPage />} />
             <Route path="ayuda/sistema" element={<SystemInfoPage />} />
             <Route path="ayuda/soporte" element={<ContactSupportPage />} />
+            <Route path="ayuda/faq" element={<FAQPage />} />
           </Route>
 
           {/* Ruta catch-all */}
