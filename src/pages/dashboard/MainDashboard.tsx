@@ -28,6 +28,7 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { StatCard } from '../../components/common/StatCard';
 import { SectionHeader } from '../../components/common/SectionHeader';
+import { SalesChart } from '../../components/dashboard/SalesChart';
 import { dashboardService } from '../../services/mockApi';
 import type { StockAlert, StockMovement, WidgetStat } from '../../types';
 
@@ -522,6 +523,10 @@ export const MainDashboard = () => {
           </Card>
         </Grid>
       </Grid>
+
+      {/* Gráfico de Ventas */}
+      <SalesChart />
+
       <Card>
         <CardContent>
           <Stack spacing={3}>
