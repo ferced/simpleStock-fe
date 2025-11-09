@@ -6,6 +6,8 @@ import PeopleIcon from '@mui/icons-material/People';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import StarIcon from '@mui/icons-material/Star';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
   Avatar,
   Box,
@@ -353,6 +355,137 @@ export const MainDashboard = () => {
                   </ListItem>
                 ))}
               </List>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardContent>
+              <Stack spacing={3}>
+                <SectionHeader
+                  title="Top Productos Más Vendidos"
+                  subtitle="Los más populares del mes"
+                  action={<Chip icon={<StarIcon />} label="Este mes" color="primary" />}
+                />
+                <List>
+                  <ListItem sx={{ borderRadius: 2, mb: 1, bgcolor: 'primary.lighter' }}>
+                    <ListItemAvatar>
+                      <Avatar sx={{ bgcolor: 'primary.main' }}>
+                        <Typography variant="h6" fontWeight={700}>1</Typography>
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={
+                        <Stack direction="row" spacing={1} alignItems="center">
+                          <Typography variant="body1" fontWeight={600}>
+                            Monitor LED 24" Full HD
+                          </Typography>
+                          <Chip icon={<StarIcon fontSize="small" />} label="Top" size="small" color="primary" />
+                        </Stack>
+                      }
+                      secondary={
+                        <Stack spacing={0.5}>
+                          <Typography variant="body2" color="text.secondary">
+                            <ShoppingCartIcon fontSize="small" sx={{ verticalAlign: 'middle', mr: 0.5 }} />
+                            245 unidades vendidas
+                          </Typography>
+                          <Typography variant="caption" color="text.disabled">
+                            Ingresos: $1,837,500
+                          </Typography>
+                        </Stack>
+                      }
+                    />
+                  </ListItem>
+
+                  <ListItem sx={{ borderRadius: 2, mb: 1 }}>
+                    <ListItemAvatar>
+                      <Avatar sx={{ bgcolor: 'secondary.light', color: 'secondary.dark' }}>
+                        <Typography variant="h6" fontWeight={700}>2</Typography>
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="Teclado Mecánico RGB"
+                      secondary={
+                        <Stack spacing={0.5}>
+                          <Typography variant="body2" color="text.secondary">
+                            <ShoppingCartIcon fontSize="small" sx={{ verticalAlign: 'middle', mr: 0.5 }} />
+                            198 unidades vendidas
+                          </Typography>
+                          <Typography variant="caption" color="text.disabled">
+                            Ingresos: $1,485,000
+                          </Typography>
+                        </Stack>
+                      }
+                    />
+                  </ListItem>
+
+                  <ListItem sx={{ borderRadius: 2, mb: 1 }}>
+                    <ListItemAvatar>
+                      <Avatar sx={{ bgcolor: 'secondary.light', color: 'secondary.dark' }}>
+                        <Typography variant="h6" fontWeight={700}>3</Typography>
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="Mouse Inalámbrico Ergonómico"
+                      secondary={
+                        <Stack spacing={0.5}>
+                          <Typography variant="body2" color="text.secondary">
+                            <ShoppingCartIcon fontSize="small" sx={{ verticalAlign: 'middle', mr: 0.5 }} />
+                            187 unidades vendidas
+                          </Typography>
+                          <Typography variant="caption" color="text.disabled">
+                            Ingresos: $935,000
+                          </Typography>
+                        </Stack>
+                      }
+                    />
+                  </ListItem>
+
+                  <ListItem sx={{ borderRadius: 2, mb: 1 }}>
+                    <ListItemAvatar>
+                      <Avatar sx={{ bgcolor: 'grey.300' }}>
+                        <Typography variant="h6" fontWeight={700}>4</Typography>
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="Webcam HD 1080p"
+                      secondary={
+                        <Stack spacing={0.5}>
+                          <Typography variant="body2" color="text.secondary">
+                            <ShoppingCartIcon fontSize="small" sx={{ verticalAlign: 'middle', mr: 0.5 }} />
+                            156 unidades vendidas
+                          </Typography>
+                          <Typography variant="caption" color="text.disabled">
+                            Ingresos: $780,000
+                          </Typography>
+                        </Stack>
+                      }
+                    />
+                  </ListItem>
+
+                  <ListItem sx={{ borderRadius: 2 }}>
+                    <ListItemAvatar>
+                      <Avatar sx={{ bgcolor: 'grey.300' }}>
+                        <Typography variant="h6" fontWeight={700}>5</Typography>
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary="Auriculares con Micrófono"
+                      secondary={
+                        <Stack spacing={0.5}>
+                          <Typography variant="body2" color="text.secondary">
+                            <ShoppingCartIcon fontSize="small" sx={{ verticalAlign: 'middle', mr: 0.5 }} />
+                            142 unidades vendidas
+                          </Typography>
+                          <Typography variant="caption" color="text.disabled">
+                            Ingresos: $568,000
+                          </Typography>
+                        </Stack>
+                      }
+                    />
+                  </ListItem>
+                </List>
+              </Stack>
             </CardContent>
           </Card>
         </Grid>
