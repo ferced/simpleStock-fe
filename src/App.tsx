@@ -21,6 +21,7 @@ import { ClientStatementPage } from './pages/clients/ClientStatementPage';
 import { SupplierListPage } from './pages/suppliers/SupplierListPage';
 import { ReportsPage } from './pages/reports/ReportsPage';
 import { AdminPage } from './pages/admin/AdminPage';
+import { SystemSettingsPage } from './pages/admin/SystemSettingsPage';
 import { HelpPage } from './pages/help/HelpPage';
 import { SystemInfoPage } from './pages/help/SystemInfoPage';
 import { ContactSupportPage } from './pages/help/ContactSupportPage';
@@ -73,6 +74,7 @@ export const App = () => (
             <Route path="proveedores" element={<SupplierListPage />} />
             <Route path="reportes" element={<ReportsPage />} />
             <Route path="administracion" element={<AdminPage />} />
+            <Route path="administracion/configuracion" element={<SystemSettingsPage />} />
             <Route path="ayuda" element={<HelpPage />} />
             <Route path="ayuda/sistema" element={<SystemInfoPage />} />
             <Route path="ayuda/soporte" element={<ContactSupportPage />} />
