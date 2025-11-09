@@ -29,6 +29,7 @@ import { SystemInfoPage } from './pages/help/SystemInfoPage';
 import { ContactSupportPage } from './pages/help/ContactSupportPage';
 import { FAQPage } from './pages/help/FAQPage';
 import { VideoTutorialsPage } from './pages/help/VideoTutorialsPage';
+import { UserGuidePage } from './pages/help/UserGuidePage';
 import { CreateProductPage } from './pages/products/CreateProductPage';
 import { ProductDetailPage } from './pages/products/ProductDetailPage';
 import { EditProductPage } from './pages/products/EditProductPage';
@@ -86,6 +87,7 @@ export const App = () => (
             <Route path="ayuda/soporte" element={<ContactSupportPage />} />
             <Route path="ayuda/faq" element={<FAQPage />} />
             <Route path="ayuda/tutoriales" element={<VideoTutorialsPage />} />
+            <Route path="ayuda/guia" element={<UserGuidePage />} />
           </Route>
 
           {/* Ruta catch-all */}
