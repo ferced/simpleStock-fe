@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import SaveIcon from '@mui/icons-material/Save';
+import EditIcon from '@mui/icons-material/Edit';
 import {
   Alert,
   Box,
   Button,
   Card,
   CardContent,
-  CardHeader,
+  CircularProgress,
   Divider,
   Grid,
+  MenuItem,
   Snackbar,
   Stack,
   Tab,
@@ -16,6 +19,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { SectionHeader } from '../../components/common/SectionHeader';
 import type { ClientFormData } from '../../types';
 
 type TabKey = 'basic' | 'company' | 'credit';
@@ -84,58 +88,186 @@ export const EditClientPage = () => {
 
   if (!form) {
     return (
-      <Box p={3}><Typography>Cargando…</Typography></Box>
+      <Stack spacing={4}>
+        <SectionHeader
+          title="Editar Cliente"
+          subtitle="Cargando información del cliente..."
+        />
+        <Card>
+          <CardContent>
+            <Stack alignItems="center" spacing={2} py={4}>
+              <CircularProgress />
+              <Typography variant="body2" color="text.secondary">
+                Cargando datos del cliente...
+              </Typography>
+            </Stack>
+          </CardContent>
+        </Card>
+      </Stack>
     );
   }
 
   return (
-    <Box p={3}>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={2}>
-        <Typography variant="h5">Editar Cliente</Typography>
-        <Stack direction="row" spacing={1}>
-          <Button variant="outlined" onClick={() => navigate(-1)}>Cancelar</Button>
-          <Button variant="contained" onClick={handleSubmit as any} disabled={isSubmitting}>{isSubmitting ? 'Guardando…' : 'Guardar'}</Button>
-        </Stack>
-      </Stack>
+    <Stack spacing={4}>
+      <SectionHeader
+        title="Editar Cliente"
+        subtitle="Modificá la información del cliente"
+        action={
+          <Stack direction="row" spacing={1}>
+            <Button variant="outlined" onClick={() => navigate(`/clientes/${id}`)}>
+              Cancelar
+            </Button>
+            <Button
+              variant="contained"
+              startIcon={<SaveIcon />}
+              onClick={handleSubmit as any}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Guardando…' : 'Guardar Cambios'}
+            </Button>
+          </Stack>
+        }
+      />
 
       <Card>
-        <CardHeader title="Formulario" />
-        <Divider />
         <CardContent>
-          <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 2 }}>
-            <Tab value="basic" label="Básico" />
-            <Tab value="company" label="Empresa" />
-            <Tab value="credit" label="Crédito" />
+          <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 3 }}>
+            <Tab value="basic" label="Información Básica" />
+            <Tab value="company" label="Información Fiscal" />
+            <Tab value="credit" label="Condiciones Comerciales" />
           </Tabs>
 
           {tab === 'basic' && (
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}><TextField label="Nombre" fullWidth value={form.name} onChange={handleChange('name')} error={!!errors.name} helperText={errors.name} required /></Grid>
-              <Grid item xs={12} md={6}><TextField label="Email" fullWidth value={form.email} onChange={handleChange('email')} error={!!errors.email} helperText={errors.email} required /></Grid>
-              <Grid item xs={12} md={6}><TextField label="Teléfono" fullWidth value={form.phone || ''} onChange={handleChange('phone')} /></Grid>
-              <Grid item xs={12} md={6}><TextField label="Dirección" fullWidth value={form.address || ''} onChange={handleChange('address')} /></Grid>
-              <Grid item xs={12} md={6}><TextField label="Ciudad" fullWidth value={form.city || ''} onChange={handleChange('city')} /></Grid>
-              <Grid item xs={12} md={6}><TextField label="País" fullWidth value={form.country || ''} onChange={handleChange('country')} /></Grid>
-            </Grid>
+            <Stack spacing={3}>
+              <Typography variant="body2" color="text.secondary">
+                Información de contacto y ubicación del cliente
+              </Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    label="Nombre completo"
+                    fullWidth
+                    value={form.name}
+                    onChange={handleChange('name')}
+                    error={!!errors.name}
+                    helperText={errors.name || 'Nombre del cliente o razón social'}
+                    required
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    label="Email"
+                    fullWidth
+                    type="email"
+                    value={form.email}
+                    onChange={handleChange('email')}
+                    error={!!errors.email}
+                    helperText={errors.email || 'Email para envío de facturas'}
+                    required
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    label="Teléfono"
+                    fullWidth
+                    value={form.phone || ''}
+                    onChange={handleChange('phone')}
+                    helperText="Teléfono de contacto"
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    label="Dirección"
+                    fullWidth
+                    value={form.address || ''}
+                    onChange={handleChange('address')}
+                    helperText="Dirección física o postal"
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    label="Ciudad"
+                    fullWidth
+                    value={form.city || ''}
+                    onChange={handleChange('city')}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    label="País"
+                    fullWidth
+                    value={form.country || ''}
+                    onChange={handleChange('country')}
+                  />
+                </Grid>
+              </Grid>
+            </Stack>
           )}
 
           {tab === 'company' && (
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}><TextField label="Empresa" fullWidth value={form.company || ''} onChange={handleChange('company')} /></Grid>
-              <Grid item xs={12} md={6}><TextField label="CUIT/RUT" fullWidth value={form.taxId || ''} onChange={handleChange('taxId')} error={!!errors.taxId} helperText={errors.taxId} /></Grid>
-            </Grid>
+            <Stack spacing={3}>
+              <Typography variant="body2" color="text.secondary">
+                Información fiscal y de facturación del cliente
+              </Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    label="Razón Social"
+                    fullWidth
+                    value={form.company || ''}
+                    onChange={handleChange('company')}
+                    helperText="Nombre legal de la empresa (opcional)"
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    label="CUIT/RUT/ID Fiscal"
+                    fullWidth
+                    value={form.taxId || ''}
+                    onChange={handleChange('taxId')}
+                    error={!!errors.taxId}
+                    helperText={errors.taxId || 'Identificación fiscal del cliente'}
+                  />
+                </Grid>
+              </Grid>
+            </Stack>
           )}
 
           {tab === 'credit' && (
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}><TextField label="Límite de crédito" fullWidth type="number" value={form.creditLimit ?? ''} onChange={handleChange('creditLimit')} error={!!errors.creditLimit} helperText={errors.creditLimit} /></Grid>
-              <Grid item xs={12} md={6}><TextField select fullWidth label="Términos de pago" value={form.paymentTerms || 'cash'} onChange={handleChange('paymentTerms')}>
-                <option value="cash">Contado</option>
-                <option value="30days">30 días</option>
-                <option value="60days">60 días</option>
-                <option value="90days">90 días</option>
-              </TextField></Grid>
-            </Grid>
+            <Stack spacing={3}>
+              <Typography variant="body2" color="text.secondary">
+                Configurá las condiciones comerciales y límites de crédito
+              </Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    label="Límite de crédito"
+                    fullWidth
+                    type="number"
+                    value={form.creditLimit ?? ''}
+                    onChange={handleChange('creditLimit')}
+                    error={!!errors.creditLimit}
+                    helperText={errors.creditLimit || 'Monto máximo de crédito disponible'}
+                    inputProps={{ min: 0 }}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    select
+                    fullWidth
+                    label="Términos de pago"
+                    value={form.paymentTerms || 'cash'}
+                    onChange={handleChange('paymentTerms')}
+                    helperText="Plazo de pago preferido"
+                  >
+                    <MenuItem value="cash">Contado</MenuItem>
+                    <MenuItem value="30days">30 días</MenuItem>
+                    <MenuItem value="60days">60 días</MenuItem>
+                    <MenuItem value="90days">90 días</MenuItem>
+                  </TextField>
+                </Grid>
+              </Grid>
+            </Stack>
           )}
         </CardContent>
       </Card>
