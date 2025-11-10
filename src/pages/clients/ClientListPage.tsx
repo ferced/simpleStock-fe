@@ -4,6 +4,7 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import DownloadIcon from '@mui/icons-material/Download';
 import EditIcon from '@mui/icons-material/Edit';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import SearchIcon from '@mui/icons-material/Search';
 import {
   Avatar,
   Box,
@@ -23,6 +24,7 @@ import {
   MenuItem,
   Checkbox,
   FormControlLabel,
+  InputAdornment,
   TextField,
   Typography,
 } from '@mui/material';
@@ -87,6 +89,14 @@ export const ClientListPage = () => {
     return filteredClients.slice(start, start + rowsPerPage);
   }, [filteredClients, page, rowsPerPage]);
 
+  const clientStats = useMemo(() => {
+    const totalClients = clients.length;
+    const withDebt = clients.filter(c => c.totalBalance > 0).length;
+    const totalDebt = clients.reduce((sum, c) => sum + c.totalBalance, 0);
+    const activeInvoicesCount = clients.reduce((sum, c) => sum + c.activeInvoices, 0);
+    return { totalClients, withDebt, totalDebt, activeInvoicesCount };
+  }, [clients]);
+
   const exportCSV = () => {
     const header = ['id', 'name', 'email', 'company', 'totalBalance', 'activeInvoices'];
     const rows = filteredClients.map((c) => [c.id, c.name, c.email, c.company || '', c.totalBalance, c.activeInvoices]);
@@ -118,6 +128,71 @@ export const ClientListPage = () => {
           </Stack>
         }
       />
+
+      {/* Estadísticas */}
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={3}>
+          <Card>
+            <CardContent>
+              <Stack spacing={1}>
+                <Typography variant="caption" color="text.secondary">
+                  Total Clientes
+                </Typography>
+                <Typography variant="h5" fontWeight={700}>
+                  {clientStats.totalClients}
+                </Typography>
+                <Chip label="Registrados" size="small" />
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <Card>
+            <CardContent>
+              <Stack spacing={1}>
+                <Typography variant="caption" color="text.secondary">
+                  Con Saldo Pendiente
+                </Typography>
+                <Typography variant="h5" fontWeight={700} color="warning.main">
+                  {clientStats.withDebt}
+                </Typography>
+                <Chip label="Requieren seguimiento" size="small" color="warning" />
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <Card>
+            <CardContent>
+              <Stack spacing={1}>
+                <Typography variant="caption" color="text.secondary">
+                  Deuda Total
+                </Typography>
+                <Typography variant="h5" fontWeight={700} color="error.main">
+                  ${clientStats.totalDebt.toLocaleString('es-AR')}
+                </Typography>
+                <Chip label="Por cobrar" size="small" color="error" />
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <Card>
+            <CardContent>
+              <Stack spacing={1}>
+                <Typography variant="caption" color="text.secondary">
+                  Facturas Activas
+                </Typography>
+                <Typography variant="h5" fontWeight={700} color="primary.main">
+                  {clientStats.activeInvoicesCount}
+                </Typography>
+                <Chip label="Total" size="small" color="primary" />
+              </Stack>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+
       <Grid container spacing={3}>
         <Grid item xs={12} md={8}>
           <Card>
@@ -128,7 +203,17 @@ export const ClientListPage = () => {
                   placeholder="Buscar por nombre, email o empresa"
                   value={search}
                   onChange={(event) => setSearch(event.target.value)}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
+                <Typography variant="body2" color="text.secondary">
+                  Mostrando {filteredClients.length} de {clients.length} clientes
+                </Typography>
                 <Grid container spacing={2}>
                   <Grid item>
                     <FormControlLabel control={<Checkbox checked={onlyDebt} onChange={(e) => setOnlyDebt(e.target.checked)} />} label="Sólo con saldo > 0" />
