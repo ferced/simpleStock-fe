@@ -17,6 +17,7 @@ import { InvoiceListPage } from './pages/invoicing/InvoiceListPage';
 import { CreateInvoicePage } from './pages/invoicing/CreateInvoicePage';
 import { InvoiceDetailPage } from './pages/invoicing/InvoiceDetailPage';
 import { CreditNotesPage } from './pages/invoicing/CreditNotesPage';
+import { PaymentTrackingPage } from './pages/invoicing/PaymentTrackingPage';
 import { ClientListPage } from './pages/clients/ClientListPage';
 import { CreateClientPage } from './pages/clients/CreateClientPage';
 import { EditClientPage } from './pages/clients/EditClientPage';
@@ -80,6 +81,7 @@ export const App = () => (
             <Route path="facturacion/nueva" element={<CreateInvoicePage />} />
             <Route path="facturacion/:id" element={<InvoiceDetailPage />} />
             <Route path="facturacion/notas-credito" element={<CreditNotesPage />} />
+            <Route path="facturacion/pagos" element={<PaymentTrackingPage />} />
             <Route path="clientes" element={<ClientListPage />} />
             <Route path="clientes/nuevo" element={<CreateClientPage />} />
             <Route path="clientes/:id/editar" element={<EditClientPage />} />
