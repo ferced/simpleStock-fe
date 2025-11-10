@@ -28,6 +28,7 @@ import { SupplierDetailPage } from './pages/suppliers/SupplierDetailPage';
 import { CreateEditSupplierPage } from './pages/suppliers/CreateEditSupplierPage';
 import { PurchaseOrdersPage } from './pages/suppliers/PurchaseOrdersPage';
 import { ReportsPage } from './pages/reports/ReportsPage';
+import { SalesReportsPage } from './pages/reports/SalesReportsPage';
 import { AdminPage } from './pages/admin/AdminPage';
 import { SystemSettingsPage } from './pages/admin/SystemSettingsPage';
 import { UserManagementPage } from './pages/admin/UserManagementPage';
@@ -93,6 +94,7 @@ export const App = () => (
             <Route path="proveedores/:id" element={<SupplierDetailPage />} />
             <Route path="proveedores/ordenes" element={<PurchaseOrdersPage />} />
             <Route path="reportes" element={<ReportsPage />} />
+            <Route path="reportes/ventas" element={<SalesReportsPage />} />
             <Route path="administracion" element={<AdminPage />} />
             <Route path="administracion/configuracion" element={<SystemSettingsPage />} />
             <Route path="administracion/usuarios" element={<UserManagementPage />} />
