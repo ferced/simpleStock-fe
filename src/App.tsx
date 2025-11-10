@@ -11,6 +11,7 @@ import { MainDashboard } from './pages/dashboard/MainDashboard';
 import { ProductListPage } from './pages/products/ProductListPage';
 import { InventoryOverviewPage } from './pages/inventory/InventoryOverviewPage';
 import { StockEntryPage } from './pages/inventory/StockEntryPage';
+import { StockExitPage } from './pages/inventory/StockExitPage';
 import { InvoiceListPage } from './pages/invoicing/InvoiceListPage';
 import { CreateInvoicePage } from './pages/invoicing/CreateInvoicePage';
 import { InvoiceDetailPage } from './pages/invoicing/InvoiceDetailPage';
@@ -69,6 +70,7 @@ export const App = () => (
             <Route path="productos/categorias" element={<CategoriesPage />} />
             <Route path="inventario" element={<InventoryOverviewPage />} />
             <Route path="inventario/entradas" element={<StockEntryPage />} />
+            <Route path="inventario/salidas" element={<StockExitPage />} />
             <Route path="facturacion" element={<InvoiceListPage />} />
             <Route path="facturacion/nueva" element={<CreateInvoicePage />} />
             <Route path="facturacion/:id" element={<InvoiceDetailPage />} />
