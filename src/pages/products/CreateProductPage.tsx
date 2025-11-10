@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
+import SaveIcon from '@mui/icons-material/Save';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import {
   Box,
   Button,
   Card,
   CardContent,
-  CardHeader,
   Chip,
   Divider,
   Grid,
@@ -17,6 +18,7 @@ import {
   Alert,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { SectionHeader } from '../../components/common/SectionHeader';
 import { ProductFormData, SupplierSummary, ProductCategory } from '../../types';
 
 type FormErrors = Partial<Record<keyof ProductFormData, string>>;
@@ -160,32 +162,44 @@ export const CreateProductPage = () => {
   };
 
   return (
-    <Box p={3}>
-      <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h5">Crear Producto</Typography>
-        <Stack direction="row" spacing={1}>
-          <Button variant="outlined" onClick={() => navigate(-1)}>Cancelar</Button>
-          <Button variant="contained" onClick={handleSubmit as any} disabled={isSubmitting}>
-            {isSubmitting ? 'Guardando...' : 'Guardar'}
-          </Button>
-        </Stack>
-      </Stack>
+    <Stack spacing={4}>
+      <SectionHeader
+        title="Crear Producto"
+        subtitle="Registrá un nuevo producto en tu inventario"
+        action={
+          <Stack direction="row" spacing={1}>
+            <Button variant="outlined" onClick={() => navigate('/productos')}>
+              Cancelar
+            </Button>
+            <Button
+              variant="contained"
+              startIcon={<SaveIcon />}
+              onClick={handleSubmit as any}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Guardando...' : 'Crear Producto'}
+            </Button>
+          </Stack>
+        }
+      />
 
       <form onSubmit={handleSubmit} noValidate>
         <Card>
-          <CardHeader title="Información General" />
-          <Divider />
           <CardContent>
+            <Typography variant="h6" fontWeight={700} mb={2}>
+              Información General
+            </Typography>
+            <Divider sx={{ mb: 3 }} />
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
                 <TextField
-                  label="Nombre"
+                  label="Nombre del Producto"
                   fullWidth
                   value={form.name}
                   onChange={handleChange('name')}
                   onBlur={onBlurName}
                   error={!!errors.name}
-                  helperText={errors.name}
+                  helperText={errors.name || 'Nombre comercial del producto'}
                   required
                 />
               </Grid>
@@ -196,6 +210,7 @@ export const CreateProductPage = () => {
                   value={form.sku}
                   onChange={handleChange('sku')}
                   placeholder={generatedSku || 'AUTO'}
+                  helperText="Se genera automáticamente si se deja vacío"
                 />
               </Grid>
               <Grid item xs={12} md={3}>
@@ -206,7 +221,7 @@ export const CreateProductPage = () => {
                   value={form.categoryId}
                   onChange={handleChange('categoryId')}
                   error={!!errors.categoryId}
-                  helperText={errors.categoryId}
+                  helperText={errors.categoryId || 'Categoría del producto'}
                   required
                 >
                   {categories.map((c) => (
@@ -224,29 +239,30 @@ export const CreateProductPage = () => {
                   minRows={3}
                   value={form.description || ''}
                   onChange={handleChange('description')}
+                  helperText="Descripción detallada del producto (opcional)"
                 />
               </Grid>
             </Grid>
           </CardContent>
         </Card>
 
-        <Box height={16} />
-
         <Card>
-          <CardHeader title="Precios e Impuestos" />
-          <Divider />
           <CardContent>
+            <Typography variant="h6" fontWeight={700} mb={2}>
+              Precios e Impuestos
+            </Typography>
+            <Divider sx={{ mb: 3 }} />
             <Grid container spacing={2}>
               <Grid item xs={12} md={4}>
                 <TextField
-                  label="Costo"
+                  label="Precio de Costo"
                   fullWidth
                   type="number"
                   InputProps={{ startAdornment: currencyAdornment }}
                   value={form.costPrice}
                   onChange={handleChange('costPrice')}
                   error={!!errors.costPrice}
-                  helperText={errors.costPrice}
+                  helperText={errors.costPrice || 'Costo de adquisición del producto'}
                   required
                 />
               </Grid>
@@ -259,7 +275,7 @@ export const CreateProductPage = () => {
                   value={form.salePrice}
                   onChange={handleChange('salePrice')}
                   error={!!errors.salePrice}
-                  helperText={errors.salePrice}
+                  helperText={errors.salePrice || 'Precio al público'}
                   required
                 />
               </Grid>
@@ -271,18 +287,19 @@ export const CreateProductPage = () => {
                   InputProps={{ startAdornment: currencyAdornment }}
                   value={form.wholesalePrice ?? ''}
                   onChange={handleChange('wholesalePrice')}
+                  helperText="Precio para compras en cantidad (opcional)"
                 />
               </Grid>
               <Grid item xs={12} md={4}>
                 <TextField
-                  label="Impuesto"
+                  label="Tasa de Impuesto"
                   fullWidth
                   type="number"
                   InputProps={{ endAdornment: percentAdornment }}
                   value={form.taxRate}
                   onChange={handleChange('taxRate')}
                   error={!!errors.taxRate}
-                  helperText={errors.taxRate}
+                  helperText={errors.taxRate || 'IVA u otro impuesto aplicable'}
                   required
                 />
               </Grid>
@@ -290,12 +307,12 @@ export const CreateProductPage = () => {
           </CardContent>
         </Card>
 
-        <Box height={16} />
-
         <Card>
-          <CardHeader title="Stock y Proveedores" />
-          <Divider />
           <CardContent>
+            <Typography variant="h6" fontWeight={700} mb={2}>
+              Stock y Proveedores
+            </Typography>
+            <Divider sx={{ mb: 3 }} />
             <Grid container spacing={2}>
               <Grid item xs={12} md={4}>
                 <TextField
@@ -305,8 +322,9 @@ export const CreateProductPage = () => {
                   value={form.initialStock}
                   onChange={handleChange('initialStock')}
                   error={!!errors.initialStock}
-                  helperText={errors.initialStock}
+                  helperText={errors.initialStock || 'Cantidad inicial en inventario'}
                   required
+                  inputProps={{ min: 0 }}
                 />
               </Grid>
               <Grid item xs={12} md={4}>
@@ -317,8 +335,9 @@ export const CreateProductPage = () => {
                   value={form.minimumStock}
                   onChange={handleChange('minimumStock')}
                   error={!!errors.minimumStock}
-                  helperText={errors.minimumStock}
+                  helperText={errors.minimumStock || 'Nivel de alerta de stock bajo'}
                   required
+                  inputProps={{ min: 0 }}
                 />
               </Grid>
               <Grid item xs={12} md={4}>
@@ -328,12 +347,17 @@ export const CreateProductPage = () => {
                   type="number"
                   value={form.maximumStock ?? ''}
                   onChange={handleChange('maximumStock')}
+                  helperText="Nivel máximo de inventario (opcional)"
+                  inputProps={{ min: 0 }}
                 />
               </Grid>
 
               <Grid item xs={12}>
-                <Typography variant="subtitle2" gutterBottom>
+                <Typography variant="subtitle2" fontWeight={600} gutterBottom>
                   Proveedores
+                </Typography>
+                <Typography variant="body2" color="text.secondary" mb={2}>
+                  Seleccioná los proveedores de este producto
                 </Typography>
                 <Stack direction="row" spacing={1} flexWrap="wrap">
                   {suppliers.map((s) => {
@@ -355,36 +379,51 @@ export const CreateProductPage = () => {
           </CardContent>
         </Card>
 
-        <Box height={16} />
-
         <Card>
-          <CardHeader title="Imágenes y Códigos" />
-          <Divider />
           <CardContent>
+            <Typography variant="h6" fontWeight={700} mb={2}>
+              Imágenes y Códigos
+            </Typography>
+            <Divider sx={{ mb: 3 }} />
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <Typography variant="subtitle2">URLs de imágenes (máx 5)</Typography>
-                  <Button
-                    size="small"
-                    onClick={handleAddImageUrl}
-                    disabled={(form.imageUrls?.length || 0) >= 5}
-                  >
-                    Agregar
-                  </Button>
+                <Stack spacing={2}>
+                  <Stack direction="row" spacing={1} alignItems="center">
+                    <Typography variant="subtitle2" fontWeight={600}>
+                      URLs de Imágenes (máximo 5)
+                    </Typography>
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      startIcon={<AddPhotoAlternateIcon />}
+                      onClick={handleAddImageUrl}
+                      disabled={(form.imageUrls?.length || 0) >= 5}
+                    >
+                      Agregar URL
+                    </Button>
+                  </Stack>
+                  <Typography variant="body2" color="text.secondary">
+                    Agregá URLs de imágenes del producto
+                  </Typography>
+                  <Box>
+                    {form.imageUrls?.map((url, idx) => (
+                      <TextField
+                        key={idx}
+                        fullWidth
+                        placeholder="https://ejemplo.com/imagen.jpg"
+                        value={url}
+                        onChange={(e) => handleImageUrlChange(idx, e.target.value)}
+                        sx={{ mb: 1 }}
+                        helperText={`Imagen ${idx + 1}`}
+                      />
+                    ))}
+                    {form.imageUrls?.length === 0 && (
+                      <Typography variant="body2" color="text.disabled">
+                        No hay imágenes agregadas
+                      </Typography>
+                    )}
+                  </Box>
                 </Stack>
-                <Box mt={1}>
-                  {form.imageUrls?.map((url, idx) => (
-                    <TextField
-                      key={idx}
-                      fullWidth
-                      placeholder="https://..."
-                      value={url}
-                      onChange={(e) => handleImageUrlChange(idx, e.target.value)}
-                      sx={{ mb: 1 }}
-                    />
-                  ))}
-                </Box>
               </Grid>
               <Grid item xs={12} md={3}>
                 <TextField
@@ -392,6 +431,7 @@ export const CreateProductPage = () => {
                   fullWidth
                   value={form.barcode || ''}
                   onChange={handleChange('barcode')}
+                  helperText="Código de barras del producto (opcional)"
                 />
               </Grid>
               <Grid item xs={12} md={3}>
@@ -400,6 +440,7 @@ export const CreateProductPage = () => {
                   fullWidth
                   value={form.internalCode || ''}
                   onChange={handleChange('internalCode')}
+                  helperText="Código interno de identificación (opcional)"
                 />
               </Grid>
             </Grid>
@@ -417,7 +458,7 @@ export const CreateProductPage = () => {
           Producto creado correctamente
         </Alert>
       </Snackbar>
-    </Box>
+    </Stack>
   );
 };
 
