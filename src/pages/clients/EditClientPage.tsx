@@ -275,7 +275,7 @@ export const EditClientPage = () => {
       <Snackbar open={toastOpen} autoHideDuration={2500} onClose={() => setToastOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
         <Alert severity="success" variant="filled" sx={{ width: '100%' }}>Cliente actualizado correctamente</Alert>
       </Snackbar>
-    </Box>
+    </Stack>
   );
 };
 

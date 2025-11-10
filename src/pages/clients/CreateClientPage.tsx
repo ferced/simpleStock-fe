@@ -244,7 +244,7 @@ export const CreateClientPage = () => {
       <Snackbar open={toastOpen} autoHideDuration={2500} onClose={() => setToastOpen(false)} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
         <Alert severity="success" variant="filled" sx={{ width: '100%' }}>Cliente creado correctamente</Alert>
       </Snackbar>
-    </Box>
+    </Stack>
   );
 };
 
