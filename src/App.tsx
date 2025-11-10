@@ -33,6 +33,7 @@ import { InventoryReportsPage } from './pages/reports/InventoryReportsPage';
 import { AdminPage } from './pages/admin/AdminPage';
 import { SystemSettingsPage } from './pages/admin/SystemSettingsPage';
 import { UserManagementPage } from './pages/admin/UserManagementPage';
+import { RolesPage } from './pages/admin/RolesPage';
 import { HelpPage } from './pages/help/HelpPage';
 import { SystemInfoPage } from './pages/help/SystemInfoPage';
 import { ContactSupportPage } from './pages/help/ContactSupportPage';
@@ -100,6 +101,7 @@ export const App = () => (
             <Route path="administracion" element={<AdminPage />} />
             <Route path="administracion/configuracion" element={<SystemSettingsPage />} />
             <Route path="administracion/usuarios" element={<UserManagementPage />} />
+            <Route path="administracion/roles" element={<RolesPage />} />
             <Route path="ayuda" element={<HelpPage />} />
             <Route path="ayuda/sistema" element={<SystemInfoPage />} />
             <Route path="ayuda/soporte" element={<ContactSupportPage />} />
