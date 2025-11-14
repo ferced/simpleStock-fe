@@ -1,5 +1,6 @@
 import {
   Box,
+  Collapse,
   Divider,
   Drawer,
   List,
@@ -12,8 +13,11 @@ import {
 } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import * as Icons from '@mui/icons-material';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import { navigationItems } from '../../constants/navigation';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import { useState } from 'react';
 
 const drawerWidth = 264;
 
@@ -46,6 +50,19 @@ type SidebarProps = {
 export const Sidebar = ({ mobileOpen, onClose }: SidebarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
+
+  const toggleMenu = (itemPath: string) => {
+    setOpenMenus(prev => ({ ...prev, [itemPath]: !prev[itemPath] }));
+  };
+
+  const isPathActive = (path: string, children?: typeof navigationItems) => {
+    if (location.pathname === path) return true;
+    if (children) {
+      return children.some(child => location.pathname === child.path);
+    }
+    return false;
+  };
 
   const content = (
     <Stack height="100%" justifyContent="space-between">
@@ -64,28 +81,68 @@ export const Sidebar = ({ mobileOpen, onClose }: SidebarProps) => {
         <Divider sx={{ mx: 2 }} />
         <List>
           {navigationItems.map((item) => {
-            const isActive = location.pathname === item.path;
+            const hasChildren = item.children && item.children.length > 0;
+            const isActive = isPathActive(item.path, item.children);
+            const isOpen = openMenus[item.path] ?? false;
+
             return (
-              <ListItemButton
-                key={item.path}
-                selected={isActive}
-                onClick={() => {
-                  navigate(item.path);
-                  onClose();
-                }}
-                sx={{
-                  borderRadius: 2,
-                  mx: 1,
-                  my: 0.5,
-                  '&.Mui-selected': {
-                    backgroundColor: 'rgba(44, 62, 155, 0.12)',
-                    color: 'primary.main',
-                  },
-                }}
-              >
-                {item.icon ? <ListItemIcon sx={{ color: 'inherit' }}>{resolveIcon(item.icon)}</ListItemIcon> : null}
-                <ListItemText primary={item.label} />
-              </ListItemButton>
+              <Box key={item.path}>
+                <ListItemButton
+                  selected={isActive && !hasChildren}
+                  onClick={() => {
+                    if (hasChildren) {
+                      toggleMenu(item.path);
+                    } else {
+                      navigate(item.path);
+                      onClose();
+                    }
+                  }}
+                  sx={{
+                    borderRadius: 2,
+                    mx: 1,
+                    my: 0.5,
+                    '&.Mui-selected': {
+                      backgroundColor: 'rgba(44, 62, 155, 0.12)',
+                      color: 'primary.main',
+                    },
+                  }}
+                >
+                  {item.icon ? <ListItemIcon sx={{ color: 'inherit' }}>{resolveIcon(item.icon)}</ListItemIcon> : null}
+                  <ListItemText primary={item.label} />
+                  {hasChildren ? (isOpen ? <ExpandLess /> : <ExpandMore />) : null}
+                </ListItemButton>
+                {hasChildren && (
+                  <Collapse in={isOpen} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                      {item.children!.map((child) => {
+                        const isChildActive = location.pathname === child.path;
+                        return (
+                          <ListItemButton
+                            key={child.path}
+                            selected={isChildActive}
+                            onClick={() => {
+                              navigate(child.path);
+                              onClose();
+                            }}
+                            sx={{
+                              borderRadius: 2,
+                              mx: 1,
+                              my: 0.5,
+                              pl: 7,
+                              '&.Mui-selected': {
+                                backgroundColor: 'rgba(44, 62, 155, 0.12)',
+                                color: 'primary.main',
+                              },
+                            }}
+                          >
+                            <ListItemText primary={child.label} primaryTypographyProps={{ variant: 'body2' }} />
+                          </ListItemButton>
+                        );
+                      })}
+                    </List>
+                  </Collapse>
+                )}
+              </Box>
             );
           })}
         </List>
