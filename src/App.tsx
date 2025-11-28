@@ -35,6 +35,8 @@ import { AdminPage } from './pages/admin/AdminPage';
 import { SystemSettingsPage } from './pages/admin/SystemSettingsPage';
 import { UserManagementPage } from './pages/admin/UserManagementPage';
 import { RolesPage } from './pages/admin/RolesPage';
+import { BackupPage } from './pages/admin/BackupPage';
+import { AuditLogPage } from './pages/admin/AuditLogPage';
 import { HelpPage } from './pages/help/HelpPage';
 import { SystemInfoPage } from './pages/help/SystemInfoPage';
 import { ContactSupportPage } from './pages/help/ContactSupportPage';
@@ -45,6 +47,9 @@ import { CreateProductPage } from './pages/products/CreateProductPage';
 import { ProductDetailPage } from './pages/products/ProductDetailPage';
 import { EditProductPage } from './pages/products/EditProductPage';
 import { CategoriesPage } from './pages/products/CategoriesPage';
+import { InventoryCountPage } from './pages/inventory/InventoryCountPage';
+import { CyclicCountPage } from './pages/inventory/CyclicCountPage';
+import { AnalyticsDashboardPage } from './pages/reports/AnalyticsDashboardPage';
 import theme from './theme';
 
 export const App = () => (
@@ -81,6 +86,8 @@ export const App = () => (
             <Route path="inventario/entradas" element={<StockEntryPage />} />
             <Route path="inventario/salidas" element={<StockExitPage />} />
             <Route path="inventario/transferencias" element={<StockTransfersPage />} />
+            <Route path="inventario/conteo" element={<InventoryCountPage />} />
+            <Route path="inventario/conteo-ciclico" element={<CyclicCountPage />} />
             <Route path="facturacion" element={<InvoiceListPage />} />
             <Route path="facturacion/nueva" element={<CreateInvoicePage />} />
             <Route path="facturacion/:id" element={<InvoiceDetailPage />} />
@@ -100,10 +107,13 @@ export const App = () => (
             <Route path="reportes/ventas" element={<SalesReportsPage />} />
             <Route path="reportes/inventario" element={<InventoryReportsPage />} />
             <Route path="reportes/financieros" element={<FinancialReportsPage />} />
+            <Route path="reportes/analiticas" element={<AnalyticsDashboardPage />} />
             <Route path="administracion" element={<AdminPage />} />
             <Route path="administracion/configuracion" element={<SystemSettingsPage />} />
             <Route path="administracion/usuarios" element={<UserManagementPage />} />
             <Route path="administracion/roles" element={<RolesPage />} />
+            <Route path="administracion/respaldos" element={<BackupPage />} />
+            <Route path="administracion/auditoria" element={<AuditLogPage />} />
             <Route path="ayuda" element={<HelpPage />} />
             <Route path="ayuda/sistema" element={<SystemInfoPage />} />
             <Route path="ayuda/soporte" element={<ContactSupportPage />} />

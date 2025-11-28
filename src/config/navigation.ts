@@ -27,6 +27,8 @@ export const NAV_CONFIG: NavItemConfig[] = [
       { label: 'Entradas', path: '/inventario/entradas', enabled: true },
       { label: 'Salidas', path: '/inventario/salidas', enabled: true },
       { label: 'Transferencias', path: '/inventario/transferencias', enabled: true },
+      { label: 'Conteo Físico', path: '/inventario/conteo', enabled: true },
+      { label: 'Conteo Cíclico', path: '/inventario/conteo-ciclico', enabled: true },
     ],
   },
   {
@@ -61,6 +63,7 @@ export const NAV_CONFIG: NavItemConfig[] = [
       { label: 'Ventas', path: '/reportes/ventas', enabled: true },
       { label: 'Inventario', path: '/reportes/inventario', enabled: true },
       { label: 'Financieros', path: '/reportes/financieros', enabled: true },
+      { label: 'Analíticas', path: '/reportes/analiticas', enabled: true },
     ],
   },
   {
@@ -73,6 +76,8 @@ export const NAV_CONFIG: NavItemConfig[] = [
       { label: 'Usuarios', path: '/administracion/usuarios', enabled: true },
       { label: 'Roles y Permisos', path: '/administracion/roles', enabled: true },
       { label: 'Configuración', path: '/administracion/configuracion', enabled: true },
+      { label: 'Respaldos', path: '/administracion/respaldos', enabled: true },
+      { label: 'Auditoría', path: '/administracion/auditoria', enabled: true },
     ],
   },
   {
