@@ -38,6 +38,7 @@ import { FinancialReportsPage } from './pages/reports/FinancialReportsPage';
 import { AdminPage } from './pages/admin/AdminPage';
 import { SystemSettingsPage } from './pages/admin/SystemSettingsPage';
 import { UserManagementPage } from './pages/admin/UserManagementPage';
+import { CreateEditUserPage } from './pages/admin/CreateEditUserPage';
 import { RolesPage } from './pages/admin/RolesPage';
 import { BackupPage } from './pages/admin/BackupPage';
 import { AuditLogPage } from './pages/admin/AuditLogPage';
@@ -51,6 +52,7 @@ import { CreateProductPage } from './pages/products/CreateProductPage';
 import { ProductDetailPage } from './pages/products/ProductDetailPage';
 import { EditProductPage } from './pages/products/EditProductPage';
 import { CategoriesPage } from './pages/products/CategoriesPage';
+import { BarcodesPage } from './pages/products/BarcodesPage';
 import { InventoryCountPage } from './pages/inventory/InventoryCountPage';
 import { CyclicCountPage } from './pages/inventory/CyclicCountPage';
 import { AnalyticsDashboardPage } from './pages/reports/AnalyticsDashboardPage';
@@ -86,6 +88,7 @@ export const App = () => (
             <Route path="productos/:id" element={<ProductDetailPage />} />
             <Route path="productos/:id/editar" element={<EditProductPage />} />
             <Route path="productos/categorias" element={<CategoriesPage />} />
+            <Route path="productos/codigos-barras" element={<BarcodesPage />} />
             <Route path="inventario" element={<InventoryOverviewPage />} />
             <Route path="inventario/entradas" element={<StockEntryPage />} />
             <Route path="inventario/salidas" element={<StockExitPage />} />
@@ -120,6 +123,8 @@ export const App = () => (
             <Route path="administracion" element={<AdminPage />} />
             <Route path="administracion/configuracion" element={<SystemSettingsPage />} />
             <Route path="administracion/usuarios" element={<UserManagementPage />} />
+            <Route path="administracion/usuarios/nuevo" element={<CreateEditUserPage />} />
+            <Route path="administracion/usuarios/:id/editar" element={<CreateEditUserPage />} />
             <Route path="administracion/roles" element={<RolesPage />} />
             <Route path="administracion/respaldos" element={<BackupPage />} />
             <Route path="administracion/auditoria" element={<AuditLogPage />} />
