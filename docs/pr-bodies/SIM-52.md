@@ -20,3 +20,5 @@
 
 - Linear: SIM-52 [Productos] Gestión de Categorías - CRUD completo
 
+
+
