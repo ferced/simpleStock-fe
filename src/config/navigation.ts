@@ -15,6 +15,7 @@ export const NAV_CONFIG: NavItemConfig[] = [
     children: [
       { label: 'Listado', path: '/productos', enabled: true },
       { label: 'Categorías', path: '/productos/categorias', enabled: true },
+      { label: 'Códigos de Barras', path: '/productos/codigos-barras', enabled: true },
     ],
   },
   {
