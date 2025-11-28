@@ -524,3 +524,5 @@ export const ClientStatementPage = () => {
 };
 
 export default ClientStatementPage;
+
+

@@ -212,3 +212,5 @@ export const ProductDetailPage = () => {
 
 export default ProductDetailPage;
 
+
+

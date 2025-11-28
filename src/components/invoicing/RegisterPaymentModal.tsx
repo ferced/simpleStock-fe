@@ -57,3 +57,5 @@ export const RegisterPaymentModal = ({ open, onClose, invoiceTotal, paidAmount, 
 
 export default RegisterPaymentModal;
 
+
+
