@@ -27,6 +27,8 @@ import { SupplierListPage } from './pages/suppliers/SupplierListPage';
 import { SupplierDetailPage } from './pages/suppliers/SupplierDetailPage';
 import { CreateEditSupplierPage } from './pages/suppliers/CreateEditSupplierPage';
 import { PurchaseOrdersPage } from './pages/suppliers/PurchaseOrdersPage';
+import { CreatePurchaseOrderPage } from './pages/suppliers/CreatePurchaseOrderPage';
+import { PurchaseOrderDetailPage } from './pages/suppliers/PurchaseOrderDetailPage';
 import { ReportsPage } from './pages/reports/ReportsPage';
 import { SalesReportsPage } from './pages/reports/SalesReportsPage';
 import { InventoryReportsPage } from './pages/reports/InventoryReportsPage';
@@ -103,6 +105,9 @@ export const App = () => (
             <Route path="proveedores/:id/editar" element={<CreateEditSupplierPage />} />
             <Route path="proveedores/:id" element={<SupplierDetailPage />} />
             <Route path="proveedores/ordenes" element={<PurchaseOrdersPage />} />
+            <Route path="proveedores/ordenes/nueva" element={<CreatePurchaseOrderPage />} />
+            <Route path="proveedores/ordenes/:id" element={<PurchaseOrderDetailPage />} />
+            <Route path="proveedores/ordenes/:id/editar" element={<CreatePurchaseOrderPage />} />
             <Route path="reportes" element={<ReportsPage />} />
             <Route path="reportes/ventas" element={<SalesReportsPage />} />
             <Route path="reportes/inventario" element={<InventoryReportsPage />} />
