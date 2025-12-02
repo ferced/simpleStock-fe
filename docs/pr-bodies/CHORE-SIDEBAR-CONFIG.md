@@ -19,3 +19,4 @@
 - No se modificó el tipo base `NavItem`; se usa un `NavItemConfig` extendido sólo para configuración.
 
 
+

@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /b \"C:\\Users\\Ferced\\Desktop\\Proyects\\Ferced\\simpleStock-fe\")",
+      "Bash(linearctl issue list:*)",
+      "Bash(tree:*)",
+      "Bash(linearctl issue get:*)",
+      "Bash(npm run build:*)",
+      "Bash(git checkout:*)",
+      "Bash(git pull:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr create --title \"feat(admin): implement backup and restore page (SIM-39)\" --body \"$(cat <<''EOF''\n## Summary\n- Add comprehensive backup management page under Administration section\n- Implement manual backup creation, automatic backup scheduling, and restore functionality\n- Include backup history table with download, restore, and delete actions\n\n## Test plan\n- [ ] Navigate to Administración > Respaldos\n- [ ] Create a manual backup and verify success notification\n- [ ] Configure automatic backup settings\n- [ ] Test restore and delete confirmation dialogs\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\nEOF\n)\")",
+      "Bash(gh pr merge:*)",
+      "Bash(gh pr create:*)",
+      "Bash(linearctl issue update:*)",
+      "Bash(gh run list:*)",
+      "Bash(vercel ls:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -512,3 +512,4 @@ export const ClientDetailPage = () => {
 export default ClientDetailPage;
 
 
+
